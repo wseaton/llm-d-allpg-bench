@@ -1,0 +1,15 @@
+sequenceDiagram
+  participant A as request A
+  participant B as request B
+  participant Q as QuotaStore h
+  participant DB as Postgres
+  A->>DB: acquire k (limit 2): count 1
+  B->>DB: acquire k: count 2
+  A->>Q: done, release k
+  Q->>DB: count 2 to 1, commits
+  DB--xQ: reply lost
+  Q->>DB: retry: count 1 to 0
+  Note over DB: B still runs, but k counts nothing
+  participant C as requests C, D
+  C->>DB: acquire k twice: both granted
+  Note over B,C: three requests run under a limit of two

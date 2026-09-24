@@ -1,0 +1,64 @@
+{
+  "live_requests": 2873,
+  "live_errors": 0,
+  "live_rps": 15.3,
+  "ttft_p50_ms": 238,
+  "ttft_p90_ms": 272,
+  "ttft_p99_ms": 301,
+  "itl_p50_ms": 52.0,
+  "itl_p99_ms": 95.7,
+  "e2e_p50_ms": 6853,
+  "e2e_p99_ms": 7626,
+  "slo_attainment": 1.0,
+  "window_s": 188,
+  "ttft_p99_by_20s": {
+    "0s": 306,
+    "20s": 310,
+    "40s": 295,
+    "60s": 292,
+    "80s": 306,
+    "100s": 287,
+    "120s": 291,
+    "140s": 293,
+    "160s": 363
+  },
+  "epp_requests": {
+    "p-10/Dispatched": 2940,
+    "p-10/EvictedTTL": 177,
+    "p100/Dispatched": 2873
+  },
+  "epp_queue_after": {
+    "-10": 819
+  },
+  "dispatcher_deltas": {
+    "llm_d_async_async_dispatched_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 3141.0,
+    "llm_d_async_async_request_retries_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 177.0,
+    "llm_d_async_async_request_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 2964.0,
+    "llm_d_async_async_shedded_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 177.0,
+    "llm_d_async_async_successful_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 2964.0,
+    "llm_d_async_async_tokens_total{direction=\"input\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 1922421.0,
+    "llm_d_async_async_tokens_total{direction=\"output\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 379392.0
+  },
+  "samples": {
+    "engine_running": {
+      "mean": 207.53,
+      "max": 224.0
+    },
+    "engine_waiting": {
+      "mean": 0.09,
+      "max": 4.0
+    },
+    "epp_queue_p-10": {
+      "mean": 919.0,
+      "max": 948.0
+    },
+    "epp_queue_p100": {
+      "mean": 0.0,
+      "max": 0.0
+    },
+    "saturation": {
+      "mean": 0.81,
+      "max": 0.875
+    }
+  }
+}

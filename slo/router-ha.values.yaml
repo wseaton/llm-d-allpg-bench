@@ -1,0 +1,11 @@
+## Layer on router-holdback-0.8.values.yaml: active-passive EPP (primary + standby StatefulSet)
+## behind a separate 2-replica Envoy proxy Deployment with priority routing, so losing the
+## primary EPP pod neither drops the proxy nor waits for a lease.
+router:
+  proxy:
+    mode: service
+    replicas: 2
+    priorityRouting:
+      enabled: true
+      primaryReplicas: 1
+      standbyReplicas: 1

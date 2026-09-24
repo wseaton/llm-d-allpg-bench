@@ -1,0 +1,71 @@
+submitting 10 batches x 20000 = 200000 requests
+generated 99088900 bytes in 3.6s
+submitted batch=batch_51656b2b-5298-4541-a838-08a6455f48e2 idx=2 bytes=9908890
+submitted batch=batch_1f1ba118-bccf-4ac7-b777-aff141ca9d56 idx=6 bytes=9908890
+submitted batch=batch_f1a89af0-4cd5-4a78-8493-838c1cd761fc idx=3 bytes=9908890
+submitted batch=batch_f5523727-3591-43f4-91f6-766bdbfbd8c1 idx=8 bytes=9908890
+submitted batch=batch_920ce94f-90ca-4aa3-9524-b5792c3385ce idx=1 bytes=9908890
+submitted batch=batch_45a43907-a8b5-4504-bebf-0f815019726d idx=0 bytes=9908890
+submitted batch=batch_792eb2da-d584-46aa-8627-13631f1a8d17 idx=5 bytes=9908890
+submitted batch=batch_5e3181f5-2198-45da-84ae-a1359aec1489 idx=7 bytes=9908890
+submitted batch=batch_cfc92305-bd86-4651-b689-f5cb3598af36 idx=9 bytes=9908890
+submitted batch=batch_b026d059-b774-4b8b-8524-6ec1d2da1300 idx=4 bytes=9908890
+all batches submitted in 0.2s ids=10
+SAMPLE t=0.0 done=0/200000 rate=0.0 terminal=0 failed=0
+SAMPLE t=2.0 done=0/200000 rate=0.0 terminal=0 failed=0
+SAMPLE t=4.0 done=0/200000 rate=0.0 terminal=0 failed=0
+SAMPLE t=6.0 done=0/200000 rate=0.0 terminal=0 failed=0
+SAMPLE t=8.0 done=0/200000 rate=0.0 terminal=0 failed=0
+SAMPLE t=10.0 done=0/200000 rate=0.0 terminal=0 failed=0
+SAMPLE t=12.0 done=0/200000 rate=0.0 terminal=0 failed=0
+SAMPLE t=14.0 done=0/200000 rate=0.0 terminal=0 failed=0
+SAMPLE t=16.1 done=1536/200000 rate=765.7 terminal=0 failed=0
+SAMPLE t=18.1 done=1536/200000 rate=0.0 terminal=0 failed=0
+SAMPLE t=20.1 done=1536/200000 rate=0.0 terminal=0 failed=0
+SAMPLE t=22.1 done=1536/200000 rate=0.0 terminal=0 failed=0
+SAMPLE t=24.1 done=1536/200000 rate=0.0 terminal=0 failed=0
+SAMPLE t=26.1 done=1536/200000 rate=0.0 terminal=0 failed=0
+SAMPLE t=28.1 done=1536/200000 rate=0.0 terminal=0 failed=0
+SAMPLE t=30.1 done=1536/200000 rate=0.0 terminal=0 failed=0
+SAMPLE t=32.1 done=2304/200000 rate=382.9 terminal=0 failed=2
+SAMPLE t=34.1 done=2304/200000 rate=0.0 terminal=0 failed=2
+SAMPLE t=36.1 done=2304/200000 rate=0.0 terminal=0 failed=2
+SAMPLE t=38.1 done=2304/200000 rate=0.0 terminal=0 failed=2
+SAMPLE t=40.1 done=2304/200000 rate=0.0 terminal=0 failed=2
+SAMPLE t=42.1 done=2304/200000 rate=0.0 terminal=0 failed=2
+SAMPLE t=44.1 done=2304/200000 rate=0.0 terminal=0 failed=2
+SAMPLE t=46.1 done=3328/200000 rate=510.5 terminal=0 failed=2
+SAMPLE t=48.2 done=3328/200000 rate=0.0 terminal=0 failed=2
+SAMPLE t=50.2 done=3328/200000 rate=0.0 terminal=0 failed=2
+SAMPLE t=52.2 done=3328/200000 rate=0.0 terminal=0 failed=2
+SAMPLE t=54.2 done=3328/200000 rate=0.0 terminal=0 failed=2
+SAMPLE t=56.2 done=3328/200000 rate=0.0 terminal=0 failed=2
+SAMPLE t=58.2 done=3328/200000 rate=0.0 terminal=0 failed=2
+SAMPLE t=60.2 done=3328/200000 rate=0.0 terminal=0 failed=2
+SAMPLE t=62.2 done=26187/200000 rate=11395.0 terminal=0 failed=2
+SAMPLE t=64.2 done=26187/200000 rate=0.0 terminal=0 failed=2
+SAMPLE t=66.2 done=26187/200000 rate=0.0 terminal=0 failed=2
+SAMPLE t=68.2 done=26187/200000 rate=0.0 terminal=0 failed=2
+SAMPLE t=70.2 done=26187/200000 rate=0.0 terminal=0 failed=2
+SAMPLE t=72.2 done=26187/200000 rate=0.0 terminal=0 failed=2
+SAMPLE t=74.2 done=26187/200000 rate=0.0 terminal=0 failed=2
+SAMPLE t=76.2 done=76619/200000 rate=25132.2 terminal=0 failed=2
+SAMPLE t=78.3 done=76619/200000 rate=0.0 terminal=0 failed=2
+SAMPLE t=80.3 done=80235/200000 rate=1802.4 terminal=1 failed=2
+SAMPLE t=82.3 done=93056/200000 rate=6388.9 terminal=4 failed=2
+SAMPLE t=84.3 done=100000/200000 rate=3461.2 terminal=5 failed=2
+SAMPLE t=86.3 done=100000/200000 rate=0.0 terminal=5 failed=2
+SAMPLE t=88.3 done=100000/200000 rate=0.0 terminal=5 failed=2
+SAMPLE t=90.3 done=120000/200000 rate=9966.5 terminal=6 failed=2
+SAMPLE t=92.3 done=120000/200000 rate=0.0 terminal=6 failed=2
+SAMPLE t=94.3 done=120000/200000 rate=0.0 terminal=6 failed=2
+SAMPLE t=96.3 done=120000/200000 rate=0.0 terminal=6 failed=2
+SAMPLE t=98.3 done=147723/200000 rate=13816.4 terminal=6 failed=2
+SAMPLE t=100.3 done=147723/200000 rate=0.0 terminal=6 failed=2
+SAMPLE t=102.3 done=147723/200000 rate=0.0 terminal=6 failed=2
+SAMPLE t=104.3 done=147723/200000 rate=0.0 terminal=6 failed=2
+SAMPLE t=106.3 done=147723/200000 rate=0.0 terminal=6 failed=2
+SAMPLE t=108.3 done=147723/200000 rate=0.0 terminal=6 failed=2
+SAMPLE t=110.4 done=147723/200000 rate=0.0 terminal=6 failed=2
+SAMPLE t=112.4 done=200000/200000 rate=26052.0 terminal=10 failed=2
+RESULT steady_state_median_rps=0.0 steady_state_mean_rps=1443.3 peak_rps=26052.0 total_done=200000 elapsed=112.4 submit_elapsed=0.2 drain_rps=1779.9 e2e_rps=1776.1 failed=2

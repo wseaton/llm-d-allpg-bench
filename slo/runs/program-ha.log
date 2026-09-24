@@ -1,0 +1,3 @@
+slo-HA-S16 {"live_rps": 77.7, "live_errors": 2, "ttft_p50_ms": 238, "ttft_p99_ms": 372, "slo_attainment": 0.9997, "itl_p50_ms": 51.9, "batch_done": 30365, "batch_failed": 0, "chaos": null} batch_rps 44.8 ttl_evicted 0 worst20s 396 sat {'mean': 0.8, 'max': 0.9580078125}
+slo-HA-CH16 {"live_rps": 77.9, "live_errors": 2512, "ttft_p50_ms": 235, "ttft_p99_ms": 2294, "slo_attainment": 0.9148, "itl_p50_ms": 51.8, "batch_done": 27039, "batch_failed": 0, "chaos": ["+120s delete primary epp", "+240s delete one proxy", "+360s delete dispatcher"]} batch_rps -31.5 ttl_evicted 0 worst20s 4113 sat {'mean': 0.71, 'max': 1.0}
+done

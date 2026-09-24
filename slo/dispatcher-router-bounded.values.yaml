@@ -1,0 +1,27 @@
+## Layer on ../dispatcher-values.yaml: the queue-depth gate of dispatcher-router-queuegate plus
+## a cap of 384 batch requests in flight from this dispatcher (about 110 running at a 0.8
+## holdback ceiling, plus the 256-deep EPP buffer), so a stale open reading cannot release
+## more than EPP drains within its TTL.
+ap:
+  prometheusCacheTTL: "250ms"
+  transportConfig:
+    queues:
+      - queue_name: "llm-d-async:requests:sim-pool"
+        request_path_url: "/v1/chat/completions"
+        igw_base_url: "http://10.16.3.146"
+        inference_objective: "batch"
+        gate_type: "composite"
+        gate_params:
+          gates:
+            - gate_type: "local-max-concurrency"
+              gate_params: {limit: 384}
+            - gate_type: "endpoint-scrape"
+              gate_params:
+                url: "http://10.16.3.146:9090/metrics"
+                metric: "llm_d_epp_flow_control_queue_size"
+                labels: {inference_pool: "slo", priority: "-10"}
+                max_count_per_pod: 256
+                value_type: "saturation"
+                baseline: 0
+                fallback: 0
+                absent_value: 0

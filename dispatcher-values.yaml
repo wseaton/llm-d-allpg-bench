@@ -1,0 +1,37 @@
+ap:
+  image:
+    repository: quay.io/wseaton/llm-d-async
+    tag: allpg-4
+  imagePullPolicy: IfNotPresent
+  concurrency: 1024
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - {key: kubernetes.io/hostname, operator: In, values: ["gd91fda"]}
+  resources:
+    requests: {cpu: "8", memory: 8Gi}
+    limits: {cpu: "16", memory: 16Gi}
+  metrics:
+    enabled: true
+    port: 9090
+    secure: false
+  transport: "sql"
+  transportConfig:
+    urlSecret:
+      name: "batch-gateway-secrets"
+      key: "postgresql-url"
+    result_queue_name: "llm-d-async:results:sim-pool"
+    poll_interval_ms: 5
+    batch_size: 256
+    result_batch_size: 64
+    lease_ttl_seconds: 30
+    queues:
+      - queue_name: "llm-d-async:requests:sim-pool"
+        request_path_url: "/v1/chat/completions"
+        igw_base_url: "http://10.16.1.241:8000"
+        gate_type: "constant"
+        gate_params: {}
+  modelServerMonitor:
+    enabled: false

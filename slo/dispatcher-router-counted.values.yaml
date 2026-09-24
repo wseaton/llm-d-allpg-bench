@@ -1,0 +1,28 @@
+## Pool-derived bounds with counted admission: each EPP reading grants its free batch-queue
+## slots (8 per ready engine, read from llm_d_epp_ready_endpoints) and the gate admits at
+## most that many until the next reading. Dispatcher concurrency is the only fixed setting.
+## Active-passive router (slo-proxy). Image: local branch sql-transport-retry (transport
+## retries + counted admission). Layer on ../dispatcher-values.yaml.
+ap:
+  image:
+    tag: allpg-6-counted
+  concurrency: 2048
+  prometheusCacheTTL: "250ms"
+  transportConfig:
+    queues:
+      - queue_name: "llm-d-async:requests:sim-pool"
+        request_path_url: "/v1/chat/completions"
+        igw_base_url: "http://10.16.3.16"
+        inference_objective: "batch"
+        gate_type: "endpoint-scrape"
+        gate_params:
+          url: "http://slo-epp-0.slo-epp-headless.allpg-bench.svc.cluster.local:9090/metrics"
+          metric: "llm_d_epp_flow_control_queue_size"
+          labels: {inference_pool: "slo", priority: "-10"}
+          pods_url: "http://slo-epp-0.slo-epp-headless.allpg-bench.svc.cluster.local:9090/metrics"
+          pods_metric: "llm_d_epp_ready_endpoints"
+          pods_labels: {name: "slo"}
+          max_count_per_pod: 8
+          value_type: "saturation"
+          admission: "counted"
+          absent_value: 0

@@ -1,0 +1,79 @@
+{
+  "live_requests": 33166,
+  "live_errors": 1,
+  "live_rps": 77.7,
+  "ttft_p50_ms": 239,
+  "ttft_p90_ms": 285,
+  "ttft_p99_ms": 363,
+  "itl_p50_ms": 52.2,
+  "itl_p99_ms": 94.5,
+  "e2e_p50_ms": 6890,
+  "e2e_p99_ms": 7708,
+  "slo_attainment": 0.9996,
+  "window_s": 427,
+  "ttft_p99_by_20s": {
+    "0s": 345,
+    "20s": 389,
+    "40s": 369,
+    "60s": 364,
+    "80s": 377,
+    "100s": 357,
+    "120s": 384,
+    "140s": 373,
+    "160s": 355,
+    "180s": 368,
+    "200s": 378,
+    "220s": 353,
+    "240s": 358,
+    "260s": 354,
+    "280s": 371,
+    "300s": 374,
+    "320s": 367,
+    "340s": 364,
+    "360s": 341,
+    "380s": 352,
+    "400s": 342
+  },
+  "epp_requests": {
+    "p-10/Dispatched": 18403,
+    "p100/Dispatched": 33166
+  },
+  "epp_queue_after": {},
+  "dispatcher_deltas": {
+    "llm_d_async_async_dispatched_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 18148.0,
+    "llm_d_async_async_gate_decisions_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\",reason=\"gate_closed\"}": 330193.0,
+    "llm_d_async_async_request_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 18148.0,
+    "llm_d_async_async_successful_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 19069.0,
+    "llm_d_async_async_tokens_total{direction=\"input\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 12362689.0,
+    "llm_d_async_async_tokens_total{direction=\"output\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 2440832.0
+  },
+  "samples": {
+    "engine_running": {
+      "mean": 814.22,
+      "max": 883.0
+    },
+    "engine_waiting": {
+      "mean": 2.2,
+      "max": 49.0
+    },
+    "epp_queue_p-10": {
+      "mean": 119.06,
+      "max": 128.0
+    },
+    "epp_queue_p100": {
+      "mean": 0.0,
+      "max": 0.0
+    },
+    "saturation": {
+      "mean": 0.8,
+      "max": 0.86328125
+    }
+  },
+  "batch_done": 24000,
+  "batch_total": 24000,
+  "batch_failed": 0,
+  "chaos": [
+    "+121s delete pod/slo-proxy-79c8d78f7f-f2tbx",
+    "+301s delete pod/slo-proxy-79c8d78f7f-5lst6"
+  ]
+}

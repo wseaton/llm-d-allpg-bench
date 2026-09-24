@@ -1,0 +1,18 @@
+## Layer on ../dispatcher-values.yaml: batch through the router under the batch objective,
+## gated on EPP's effective pool saturation. Closes at saturation 0.75; fails closed.
+ap:
+  prometheusCacheTTL: "250ms"
+  transportConfig:
+    queues:
+      - queue_name: "llm-d-async:requests:sim-pool"
+        request_path_url: "/v1/chat/completions"
+        igw_base_url: "http://10.16.3.146"
+        inference_objective: "batch"
+        gate_type: "endpoint-scrape"
+        gate_params:
+          url: "http://10.16.3.146:9090/metrics"
+          metric: "llm_d_epp_flow_control_pool_saturation"
+          labels: {inference_pool: "slo", stage: "effective"}
+          value_type: "saturation"
+          baseline: 0.25
+          fallback: 0

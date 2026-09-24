@@ -1,0 +1,69 @@
+{
+  "live_requests": 32652,
+  "live_errors": 0,
+  "live_rps": 106.0,
+  "ttft_p50_ms": 238,
+  "ttft_p90_ms": 278,
+  "ttft_p99_ms": 339,
+  "itl_p50_ms": 52.7,
+  "itl_p99_ms": 96.5,
+  "e2e_p50_ms": 6950,
+  "e2e_p99_ms": 7592,
+  "slo_attainment": 0.9999,
+  "window_s": 308,
+  "ttft_p99_by_20s": {
+    "0s": 384,
+    "20s": 324,
+    "40s": 334,
+    "60s": 339,
+    "80s": 317,
+    "100s": 336,
+    "120s": 329,
+    "140s": 322,
+    "160s": 327,
+    "180s": 357,
+    "200s": 330,
+    "220s": 345,
+    "240s": 331,
+    "260s": 338,
+    "280s": 327
+  },
+  "epp_requests": {
+    "p-10/Dispatched": 5454,
+    "p100/Dispatched": 32652
+  },
+  "epp_queue_after": {},
+  "dispatcher_deltas": {
+    "llm_d_async_async_dispatched_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 5476.0,
+    "llm_d_async_async_gate_decisions_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\",reason=\"gate_closed\"}": 60284.0,
+    "llm_d_async_async_request_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 5476.0,
+    "llm_d_async_async_successful_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 5475.0,
+    "llm_d_async_async_tokens_total{direction=\"input\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 3550566.0,
+    "llm_d_async_async_tokens_total{direction=\"output\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 700800.0
+  },
+  "samples": {
+    "engine_running": {
+      "mean": 833.95,
+      "max": 991.0
+    },
+    "engine_waiting": {
+      "mean": 1.43,
+      "max": 17.0
+    },
+    "epp_queue_p-10": {
+      "mean": 256.75,
+      "max": 436.0
+    },
+    "epp_queue_p100": {
+      "mean": 0.01,
+      "max": 1.0
+    },
+    "saturation": {
+      "mean": 0.82,
+      "max": 0.9716796875
+    }
+  },
+  "batch_done": 9051,
+  "batch_total": 21000,
+  "batch_failed": 0
+}

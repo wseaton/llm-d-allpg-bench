@@ -1,0 +1,29 @@
+## Pool-derived bounds: the EPP batch buffer is 8 per ready engine (128 at 16), read from the
+## primary EPP's llm_d_epp_ready_endpoints, so it follows the pool as it scales. No
+## local-max-concurrency: dispatcher concurrency is the only fixed setting. Active-passive
+## router (slo-proxy); transport errors retry (image allpg-5-retry). Layer on
+## ../dispatcher-values.yaml.
+ap:
+  image:
+    tag: allpg-5-retry
+  concurrency: 2048
+  prometheusCacheTTL: "250ms"
+  transportConfig:
+    queues:
+      - queue_name: "llm-d-async:requests:sim-pool"
+        request_path_url: "/v1/chat/completions"
+        igw_base_url: "http://10.16.3.16"
+        inference_objective: "batch"
+        gate_type: "endpoint-scrape"
+        gate_params:
+          url: "http://slo-epp-0.slo-epp-headless.allpg-bench.svc.cluster.local:9090/metrics"
+          metric: "llm_d_epp_flow_control_queue_size"
+          labels: {inference_pool: "slo", priority: "-10"}
+          pods_url: "http://slo-epp-0.slo-epp-headless.allpg-bench.svc.cluster.local:9090/metrics"
+          pods_metric: "llm_d_epp_ready_endpoints"
+          pods_labels: {name: "slo"}
+          max_count_per_pod: 8
+          value_type: "saturation"
+          baseline: 0
+          fallback: 0
+          absent_value: 0

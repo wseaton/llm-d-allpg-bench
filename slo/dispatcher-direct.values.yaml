@@ -1,0 +1,9 @@
+## Layer on ../dispatcher-values.yaml: batch straight to the engines, bypassing the router.
+ap:
+  transportConfig:
+    queues:
+      - queue_name: "llm-d-async:requests:sim-pool"
+        request_path_url: "/v1/chat/completions"
+        igw_base_url: "http://10.16.1.241:8000"
+        gate_type: "constant"
+        gate_params: {}

@@ -1,0 +1,81 @@
+## router-holdback-0.8 with saturation = max(EPP in-flight concurrency, engine queue depth), so
+## an EPP that has not dispatched the pool's current load (a restarted primary) still sees it.
+router:
+  extraServicePorts:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 8081
+  epp:
+    flags:
+      v: 2
+      allow-experimental-plugins: true
+    pluginsConfigFile: "slo-plugins.yaml"
+    pluginsCustomConfig:
+      slo-plugins.yaml: |
+        apiVersion: llm-d.ai/v1alpha1
+        kind: EndpointPickerConfig
+        featureGates:
+        - flowControl
+        plugins:
+        - type: queue-scorer
+        - type: kv-cache-utilization-scorer
+        - type: global-strict-fairness-policy
+        - type: fcfs-ordering-policy
+        - type: priority-holdback-policy
+          name: holdback
+          parameters:
+            domain: rank
+            minCeiling: 0.8
+            maxCeiling: 1.0
+        - name: pool-concurrency
+          type: concurrency-detector
+          parameters:
+            maxConcurrency: 64
+            concurrencyMode: requests
+            headroom: 0.0
+        - name: pool-queue
+          type: utilization-detector
+          parameters:
+            queueDepthThreshold: 4
+            kvCacheUtilThreshold: 1.0
+        - name: pool-saturation
+          type: max-saturation-detector
+          parameters:
+            detectors: [pool-concurrency, pool-queue]
+        schedulingProfiles:
+        - name: default
+          plugins:
+          - pluginRef: pool-concurrency
+          - pluginRef: queue-scorer
+            weight: 2
+          - pluginRef: kv-cache-utilization-scorer
+            weight: 2
+        flowControl:
+          maxBytes: "10Gi"
+          maxRequests: "20k"
+          defaultRequestTTL: "60s"
+          saturationDetector:
+            pluginRef: pool-saturation
+          usageLimitPolicyPluginRef: holdback
+          priorityBands:
+          - priority: 100
+            maxRequests: "2k"
+            fairnessPolicyRef: global-strict-fairness-policy
+            orderingPolicyRef: fcfs-ordering-policy
+          - priority: 0
+            maxRequests: "2k"
+            fairnessPolicyRef: global-strict-fairness-policy
+            orderingPolicyRef: fcfs-ordering-policy
+          - priority: -10
+            maxRequests: "10k"
+            fairnessPolicyRef: global-strict-fairness-policy
+            orderingPolicyRef: fcfs-ordering-policy
+  modelServers:
+    matchLabels:
+      app: vcr
+  monitoring:
+    prometheus:
+      enabled: false
+      auth:
+        enabled: false

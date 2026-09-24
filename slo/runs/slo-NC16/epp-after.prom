@@ -1,0 +1,9 @@
+llm_d_epp_flow_control_pool_saturation{inference_pool="slo",stage="decode"} 0.80078125
+llm_d_epp_flow_control_pool_saturation{inference_pool="slo",stage="effective"} 0.80078125
+llm_d_epp_flow_control_queue_size{fairness_id="default-flow",inference_pool="slo",model_name="sim-model",priority="-10",target_model_name="sim-model"} 709
+llm_d_epp_flow_control_queue_size{fairness_id="default-flow",inference_pool="slo",model_name="sim-model",priority="100",target_model_name="sim-model"} 0
+llm_d_epp_flow_control_requests_total{inference_pool="slo",outcome="Dispatched",priority="-10"} 178534
+llm_d_epp_flow_control_requests_total{inference_pool="slo",outcome="Dispatched",priority="100"} 367783
+llm_d_epp_flow_control_requests_total{inference_pool="slo",outcome="EvictedContextCancelled",priority="100"} 4785
+llm_d_epp_flow_control_requests_total{inference_pool="slo",outcome="EvictedTTL",priority="-10"} 7612
+llm_d_epp_flow_control_requests_total{inference_pool="slo",outcome="RejectedCapacity",priority="100"} 52

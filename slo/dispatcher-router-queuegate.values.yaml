@@ -1,0 +1,21 @@
+## Layer on ../dispatcher-values.yaml: batch through the router under the batch objective,
+## gated on the depth of EPP's batch band. Closes once 256 batch requests wait in EPP (about
+## 20 s of backlog at holdback's batch rate, well inside the 60 s TTL); fails closed.
+ap:
+  prometheusCacheTTL: "250ms"
+  transportConfig:
+    queues:
+      - queue_name: "llm-d-async:requests:sim-pool"
+        request_path_url: "/v1/chat/completions"
+        igw_base_url: "http://10.16.3.146"
+        inference_objective: "batch"
+        gate_type: "endpoint-scrape"
+        gate_params:
+          url: "http://10.16.3.146:9090/metrics"
+          metric: "llm_d_epp_flow_control_queue_size"
+          labels: {inference_pool: "slo", priority: "-10"}
+          max_count_per_pod: 256
+          value_type: "saturation"
+          baseline: 0
+          fallback: 0
+          absent_value: 0

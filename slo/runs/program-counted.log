@@ -1,0 +1,3 @@
+slo-CNT-8 {"live_rps": 38.7, "live_errors": 0, "ttft_p50_ms": 237, "ttft_p99_ms": 317, "slo_attainment": 1.0, "batch_done": 15944, "batch_failed": 0} batch_rps 22.8 ttl_evicted 0 worst20s 332 sat {'mean': 0.81, 'max': 0.87109375} batch_q {'mean': 60.04, 'max': 64.0}
+slo-CNT-scale {"live_rps": 58.6, "live_errors": 137, "ttft_p50_ms": 238, "ttft_p99_ms": 344, "slo_attainment": 0.9961, "batch_done": 24863, "batch_failed": 0} batch_rps 33.6 ttl_evicted 0 worst20s 393 sat {'mean': 0.81, 'max': 0.853125} batch_q {'mean': 102.27, 'max': 128.0}
+done

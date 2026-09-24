@@ -1,0 +1,91 @@
+{
+  "live_requests": 46963,
+  "live_errors": 2656,
+  "live_rps": 77.1,
+  "ttft_p50_ms": 238,
+  "ttft_p90_ms": 289,
+  "ttft_p99_ms": 479,
+  "itl_p50_ms": 52.1,
+  "itl_p99_ms": 93.4,
+  "e2e_p50_ms": 6881,
+  "e2e_p99_ms": 7836,
+  "slo_attainment": 0.9344,
+  "window_s": 609,
+  "ttft_p99_by_20s": {
+    "0s": 363,
+    "20s": 358,
+    "40s": 379,
+    "60s": 377,
+    "80s": 363,
+    "100s": 376,
+    "120s": 361,
+    "140s": 167,
+    "160s": 2871,
+    "180s": 383,
+    "200s": 367,
+    "220s": 357,
+    "240s": 366,
+    "260s": 364,
+    "280s": 349,
+    "300s": 377,
+    "320s": 377,
+    "340s": 390,
+    "360s": 441,
+    "380s": 416,
+    "400s": 359,
+    "420s": 412,
+    "440s": 394,
+    "460s": 365,
+    "480s": 350,
+    "500s": 357,
+    "520s": 387,
+    "540s": 367,
+    "560s": 366,
+    "580s": 373
+  },
+  "epp_requests": {
+    "p-10/Dispatched": 17649,
+    "p-10/EvictedContextCancelled": 68,
+    "p100/Dispatched": 34001
+  },
+  "epp_queue_after": {},
+  "dispatcher_deltas": {
+    "llm_d_async_async_dispatched_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": -3262.0,
+    "llm_d_async_async_gate_decisions_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\",reason=\"gate_closed\"}": 18964.0,
+    "llm_d_async_async_request_retries_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": -650.0,
+    "llm_d_async_async_request_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": -2622.0,
+    "llm_d_async_async_successful_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": -2612.0,
+    "llm_d_async_async_tokens_total{direction=\"input\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": -1693812.0,
+    "llm_d_async_async_tokens_total{direction=\"output\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": -334336.0
+  },
+  "samples": {
+    "engine_running": {
+      "mean": 777.36,
+      "max": 1039.0
+    },
+    "engine_waiting": {
+      "mean": 4.45,
+      "max": 205.0
+    },
+    "epp_queue_p-10": {
+      "mean": 149.05,
+      "max": 262.0
+    },
+    "epp_queue_p100": {
+      "mean": 0.11,
+      "max": 21.0
+    },
+    "saturation": {
+      "mean": 0.74,
+      "max": 1.0
+    }
+  },
+  "batch_done": 29310,
+  "batch_total": 36000,
+  "batch_failed": 0,
+  "chaos": [
+    "+120s delete primary epp",
+    "+240s delete one proxy",
+    "+360s delete dispatcher"
+  ]
+}

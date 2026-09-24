@@ -1,0 +1,4 @@
+ERROR:  syntax error at or near "\"
+LINE 6: \watch 2
+        ^
+command terminated with exit code 1

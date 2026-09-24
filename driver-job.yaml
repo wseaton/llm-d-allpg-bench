@@ -1,0 +1,32 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: DRIVER_NAME
+  namespace: allpg-bench
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      nodeSelector: {kubernetes.io/hostname: g80d16c}
+      containers:
+        - name: driver
+          image: python:3.12-slim
+          command: ["python", "/driver/driver.py"]
+          env:
+            - {name: BATCH_GATEWAY_URL, value: "http://10.16.1.122:8000"}
+            - {name: NUM_BATCHES, value: "NUM_BATCHES_VAL"}
+            - {name: BATCH_SIZE, value: "BATCH_SIZE_VAL"}
+            - {name: PROMPT_TOKENS, value: "PROMPT_TOKENS_VAL"}
+            - {name: MAX_TOKENS, value: "MAX_TOKENS_VAL"}
+            - {name: SAMPLE_SECONDS, value: "2"}
+            - {name: RUN_TIMEOUT, value: "3600"}
+          volumeMounts:
+            - {name: driver, mountPath: /driver}
+          resources:
+            requests: {cpu: "2", memory: 8Gi}
+            limits: {cpu: "4", memory: 16Gi}
+      volumes:
+        - name: driver
+          configMap:
+            name: allpg-driver

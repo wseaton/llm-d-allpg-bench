@@ -1,0 +1,86 @@
+{
+  "live_requests": 47054,
+  "live_errors": 0,
+  "live_rps": 77.3,
+  "ttft_p50_ms": 238,
+  "ttft_p90_ms": 287,
+  "ttft_p99_ms": 371,
+  "itl_p50_ms": 52.0,
+  "itl_p99_ms": 94.4,
+  "e2e_p50_ms": 6864,
+  "e2e_p99_ms": 7646,
+  "slo_attainment": 0.9999,
+  "window_s": 609,
+  "ttft_p99_by_20s": {
+    "0s": 354,
+    "20s": 378,
+    "40s": 372,
+    "60s": 398,
+    "80s": 365,
+    "100s": 392,
+    "120s": 364,
+    "140s": 381,
+    "160s": 337,
+    "180s": 381,
+    "200s": 386,
+    "220s": 368,
+    "240s": 361,
+    "260s": 365,
+    "280s": 354,
+    "300s": 353,
+    "320s": 379,
+    "340s": 354,
+    "360s": 372,
+    "380s": 382,
+    "400s": 370,
+    "420s": 362,
+    "440s": 382,
+    "460s": 352,
+    "480s": 387,
+    "500s": 370,
+    "520s": 347,
+    "540s": 380,
+    "560s": 370,
+    "580s": 382
+  },
+  "epp_requests": {
+    "p-10/Dispatched": 27488,
+    "p100/Dispatched": 47054
+  },
+  "epp_queue_after": {
+    "-10": 839
+  },
+  "dispatcher_deltas": {
+    "llm_d_async_async_dispatched_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 27015.0,
+    "llm_d_async_async_gate_decisions_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\",reason=\"gate_closed\"}": 115402.0,
+    "llm_d_async_async_request_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 27015.0,
+    "llm_d_async_async_successful_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 27467.0,
+    "llm_d_async_async_tokens_total{direction=\"input\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 17810315.0,
+    "llm_d_async_async_tokens_total{direction=\"output\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 3515776.0
+  },
+  "samples": {
+    "engine_running": {
+      "mean": 823.57,
+      "max": 900.0
+    },
+    "engine_waiting": {
+      "mean": 2.54,
+      "max": 23.0
+    },
+    "epp_queue_p-10": {
+      "mean": 740.35,
+      "max": 1767.0
+    },
+    "epp_queue_p100": {
+      "mean": 0.01,
+      "max": 1.0
+    },
+    "saturation": {
+      "mean": 0.81,
+      "max": 0.8857421875
+    }
+  },
+  "batch_done": 31733,
+  "batch_total": 36000,
+  "batch_failed": 0
+}

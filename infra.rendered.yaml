@@ -1,0 +1,90 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bench-postgres
+  namespace: allpg-bench
+  labels: {app: bench-postgres}
+spec:
+  nodeSelector: {kubernetes.io/hostname: g12e022}
+  containers:
+    - name: postgres
+      image: postgres:17
+      args: ["-c", "shared_preload_libraries=pg_stat_statements", "-c", "max_connections=600", "-c", "shared_buffers=8GB"]
+      env:
+        - {name: POSTGRES_HOST_AUTH_METHOD, value: trust}
+        - {name: POSTGRES_DB, value: batchgateway}
+      ports: [{containerPort: 5432}]
+      readinessProbe:
+        exec: {command: ["pg_isready", "-U", "postgres"]}
+        periodSeconds: 2
+      resources:
+        requests: {cpu: "8", memory: 32Gi}
+        limits: {cpu: "8", memory: 32Gi}
+      volumeMounts:
+        - {name: pgdata, mountPath: /var/lib/postgresql/data}
+        - {name: shm, mountPath: /dev/shm}
+  volumes:
+    - name: pgdata
+      emptyDir: {}
+    - name: shm
+      emptyDir: {medium: Memory, sizeLimit: 8Gi}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bench-postgres
+  namespace: allpg-bench
+spec:
+  selector: {app: bench-postgres}
+  ports: [{port: 5432, targetPort: 5432}]
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vcr
+  namespace: allpg-bench
+spec:
+  replicas: 4
+  selector: {matchLabels: {app: vcr}}
+  template:
+    metadata:
+      labels: {app: vcr}
+    spec:
+      nodeSelector: {kubernetes.io/hostname: gf41fb2}
+      containers:
+        - name: vcr
+          image: ghcr.io/neuralmagic/vllm-vcr:0.2.2-vllm0.27
+          env:
+            - {name: MODEL, value: Qwen/Qwen2.5-0.5B-Instruct}
+            - {name: SERVED_MODEL_NAME, value: sim-model}
+            - {name: MOCK_TTFT_MS, value: "0"}
+            - {name: MOCK_ITL_MS, value: "0"}
+            - {name: VLLM_EXTRA_ARGS, value: "--reasoning-parser none --tool-call-parser none"}
+          ports: [{containerPort: 8000}]
+          readinessProbe:
+            tcpSocket: {port: 8000}
+            periodSeconds: 2
+          resources:
+            requests: {cpu: "4", memory: 8Gi}
+            limits: {cpu: "6", memory: 12Gi}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vcr
+  namespace: allpg-bench
+spec:
+  selector: {app: vcr}
+  ports: [{port: 8000, targetPort: 8000}]
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: batch-files
+  namespace: allpg-bench
+spec:
+  accessModes: ["ReadWriteMany"]
+  storageClassName: shared-vast
+  resources:
+    requests:
+      storage: 100Gi

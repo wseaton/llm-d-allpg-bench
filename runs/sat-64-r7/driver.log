@@ -1,0 +1,32 @@
+submitting 10 batches x 20000 = 200000 requests
+generated 99088900 bytes in 3.5s
+submitted batch=batch_8ee7fa1a-8e72-4c2f-b585-03dcc02d4079 idx=9 bytes=9908890
+submitted batch=batch_9cf077a9-2d61-4598-985f-3d787eaebad7 idx=2 bytes=9908890
+submitted batch=batch_51eaa0cf-9920-4666-8015-387a0757deeb idx=8 bytes=9908890
+submitted batch=batch_3314580a-e7a0-4f33-bb43-4e2ba7134d71 idx=4 bytes=9908890
+submitted batch=batch_17878468-7132-42c0-9157-6ebec8018244 idx=6 bytes=9908890
+submitted batch=batch_84c5c6ac-52bf-4529-8173-b3fc2ef9d50f idx=3 bytes=9908890
+submitted batch=batch_3b3416d2-3764-4f5e-ae83-424dae264606 idx=5 bytes=9908890
+submitted batch=batch_cdb129e8-936a-4540-9421-891fb8e1df55 idx=0 bytes=9908890
+submitted batch=batch_3addd10f-0918-4d3d-b11c-468478ed351d idx=7 bytes=9908890
+submitted batch=batch_4098f632-53dd-4811-bca9-27ca28d2f4d3 idx=1 bytes=9908890
+all batches submitted in 0.2s ids=10
+SAMPLE t=0.0 done=0/200000 rate=0.0 terminal=0 failed=0
+SAMPLE t=2.0 done=0/200000 rate=0.0 terminal=0 failed=0
+SAMPLE t=4.0 done=0/200000 rate=0.0 terminal=0 failed=0
+SAMPLE t=6.0 done=0/200000 rate=0.0 terminal=0 failed=0
+SAMPLE t=8.0 done=0/200000 rate=0.0 terminal=0 failed=0
+SAMPLE t=10.0 done=20000/200000 rate=9969.6 terminal=1 failed=83
+SAMPLE t=12.0 done=20000/200000 rate=0.0 terminal=1 failed=83
+SAMPLE t=14.0 done=20000/200000 rate=0.0 terminal=1 failed=83
+SAMPLE t=16.1 done=80000/200000 rate=29917.3 terminal=4 failed=377
+SAMPLE t=18.1 done=100000/200000 rate=9971.5 terminal=5 failed=481
+SAMPLE t=20.1 done=100000/200000 rate=0.0 terminal=5 failed=481
+SAMPLE t=22.1 done=100000/200000 rate=0.0 terminal=5 failed=481
+SAMPLE t=24.1 done=120000/200000 rate=9969.2 terminal=6 failed=565
+SAMPLE t=26.1 done=120000/200000 rate=0.0 terminal=6 failed=565
+SAMPLE t=28.1 done=120000/200000 rate=0.0 terminal=6 failed=565
+SAMPLE t=30.1 done=120000/200000 rate=0.0 terminal=6 failed=565
+SAMPLE t=32.1 done=180000/200000 rate=29912.5 terminal=9 failed=767
+SAMPLE t=34.1 done=200000/200000 rate=9969.3 terminal=10 failed=767
+RESULT steady_state_median_rps=0.0 steady_state_mean_rps=5438.9 peak_rps=29917.3 total_done=200000 elapsed=34.1 submit_elapsed=0.2 drain_rps=5863.7 e2e_rps=5826.9 failed=767

@@ -1,0 +1,15 @@
+11528 ms | 891 calls | 12.94 ms/call | SELECT r.id, r.request_token FROM async_requests r JOIN unnest($1::text[], $2::text[]) AS k(id, request_token)
+5689 ms | 4422 calls | 1.29 ms/call | WITH picked AS MATERIALIZED ( SELECT r.id, r.request_token FROM async_requests r JOIN async_partitions q ON q.
+3905 ms | 4304 calls | 0.91 ms/call | WITH input AS ( SELECT * FROM unnest($2::text[], $3::text[], $4::bigint[], $5::text[], $6::text[], $7::bigint[
+2904 ms | 790 calls | 3.68 ms/call | INSERT INTO async_requests (id, request_token, queue, partition_id, deadline, envelope, payload, created_at) S
+752 ms | 827 calls | 0.91 ms/call | WITH picked AS MATERIALIZED ( SELECT seq FROM async_results WHERE route = $1 ORDER BY seq LIMIT $2 FOR UPDATE 
+28 ms | 2 calls | 14.11 ms/call | SELECT COUNT(*), COUNT(*) FILTER (WHERE deadline <= $2), COUNT(*) FILTER (WHERE deadline <= $3), COUNT(*) FILT
+6 ms | 13 calls | 0.44 ms/call | SELECT extract($1 from now())::int, $2, coalesce(max(age(backend_xmin)),$3), coalesce(max(extract($4 from now(
+2 ms | 827 calls | 0.00 ms/call | DELETE FROM async_results WHERE route = $1 AND expires_at > 0 AND expires_at < $2
+2 ms | 100 calls | 0.02 ms/call | SELECT id, tenant_id, expiry, tags, processor_id, priority, epoch, recovery_attempts, status, spec FROM batch_
+2 ms | 1 calls | 1.59 ms/call | WITH stale AS MATERIALIZED ( SELECT r.id, r.request_token FROM async_requests r JOIN async_partitions p ON p.q
+2 ms | 30 calls | 0.05 ms/call | UPDATE batch_items SET status = $1 WHERE id = $2 AND epoch = $3
+1 ms | 20 calls | 0.07 ms/call | INSERT INTO file_items (id, tenant_id, expiry, tags, purpose, spec, status) VALUES ($1, $2, $3, $4, $5, $6, $7
+1 ms | 5094 calls | 0.00 ms/call | commit
+1 ms | 10 calls | 0.11 ms/call | INSERT INTO batch_items (id, tenant_id, expiry, tags, processor_id, priority, epoch, recovery_attempts, spec, 
+1 ms | 5094 calls | 0.00 ms/call | begin

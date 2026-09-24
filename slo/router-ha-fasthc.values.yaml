@@ -1,0 +1,9 @@
+## Layer on router-ha.values.yaml: probe EPP health every second and eject after two misses,
+## so a terminating primary (which keeps accepting gRPC but rejects with "flow controller
+## shutting down") is ejected in ~2 s instead of the default 10 s x 3.
+router:
+  proxy:
+    healthCheckInterval: 1s
+    healthCheckTimeout: 0.5s
+    healthCheckUnhealthyThreshold: 2
+    healthCheckHealthyThreshold: 2

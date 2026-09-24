@@ -1,0 +1,85 @@
+{
+  "live_requests": 47342,
+  "live_errors": 2,
+  "live_rps": 77.7,
+  "ttft_p50_ms": 238,
+  "ttft_p90_ms": 287,
+  "ttft_p99_ms": 372,
+  "itl_p50_ms": 51.9,
+  "itl_p99_ms": 94.8,
+  "e2e_p50_ms": 6830,
+  "e2e_p99_ms": 7655,
+  "slo_attainment": 0.9997,
+  "window_s": 609,
+  "ttft_p99_by_20s": {
+    "0s": 361,
+    "20s": 373,
+    "40s": 369,
+    "60s": 370,
+    "80s": 369,
+    "100s": 386,
+    "120s": 383,
+    "140s": 371,
+    "160s": 352,
+    "180s": 353,
+    "200s": 359,
+    "220s": 391,
+    "240s": 372,
+    "260s": 369,
+    "280s": 396,
+    "300s": 376,
+    "320s": 385,
+    "340s": 375,
+    "360s": 384,
+    "380s": 375,
+    "400s": 379,
+    "420s": 361,
+    "440s": 357,
+    "460s": 368,
+    "480s": 355,
+    "500s": 367,
+    "520s": 396,
+    "540s": 352,
+    "560s": 354,
+    "580s": 384
+  },
+  "epp_requests": {
+    "p-10/Dispatched": 27263,
+    "p100/Dispatched": 47342
+  },
+  "epp_queue_after": {},
+  "dispatcher_deltas": {
+    "llm_d_async_async_dispatched_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 27200.0,
+    "llm_d_async_async_gate_decisions_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\",reason=\"gate_closed\"}": 113845.0,
+    "llm_d_async_async_request_retries_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 3.0,
+    "llm_d_async_async_request_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 27197.0,
+    "llm_d_async_async_successful_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 27198.0,
+    "llm_d_async_async_tokens_total{direction=\"input\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 17635592.0,
+    "llm_d_async_async_tokens_total{direction=\"output\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 3481344.0
+  },
+  "samples": {
+    "engine_running": {
+      "mean": 818.29,
+      "max": 982.0
+    },
+    "engine_waiting": {
+      "mean": 3.0,
+      "max": 36.0
+    },
+    "epp_queue_p-10": {
+      "mean": 171.29,
+      "max": 266.0
+    },
+    "epp_queue_p100": {
+      "mean": 0.01,
+      "max": 1.0
+    },
+    "saturation": {
+      "mean": 0.8,
+      "max": 0.9580078125
+    }
+  },
+  "batch_done": 30365,
+  "batch_total": 36000,
+  "batch_failed": 0
+}

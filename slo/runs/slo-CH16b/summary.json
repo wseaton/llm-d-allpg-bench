@@ -1,0 +1,83 @@
+{
+  "live_requests": 47242,
+  "live_errors": 774,
+  "live_rps": 78.1,
+  "ttft_p50_ms": 159,
+  "ttft_p90_ms": 260,
+  "ttft_p99_ms": 334,
+  "itl_p50_ms": 34.9,
+  "itl_p99_ms": 64.5,
+  "e2e_p50_ms": 4252,
+  "e2e_p99_ms": 7582,
+  "slo_attainment": 0.9835,
+  "window_s": 605,
+  "ttft_p99_by_20s": {
+    "0s": 362,
+    "20s": 375,
+    "40s": 376,
+    "60s": 353,
+    "80s": 351,
+    "100s": 365,
+    "120s": 357,
+    "140s": 370,
+    "160s": 373,
+    "180s": 359,
+    "200s": 366,
+    "220s": 357,
+    "240s": 179,
+    "260s": 192,
+    "280s": 183,
+    "300s": 183,
+    "320s": 194,
+    "340s": 183,
+    "360s": 187,
+    "380s": 178,
+    "400s": 187,
+    "420s": 182,
+    "440s": 178,
+    "460s": 183,
+    "480s": 185,
+    "500s": 190,
+    "520s": 188,
+    "540s": 185,
+    "560s": 184,
+    "580s": 180
+  },
+  "epp_requests": {
+    "p100/Dispatched": 28263
+  },
+  "epp_queue_after": {},
+  "dispatcher_deltas": {
+    "llm_d_async_async_gate_decisions_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\",reason=\"gate_closed\"}": -5321.0
+  },
+  "samples": {
+    "engine_running": {
+      "mean": 474.01,
+      "max": 890.0
+    },
+    "engine_waiting": {
+      "mean": 1.01,
+      "max": 18.0
+    },
+    "epp_queue_p-10": {
+      "mean": 66.63,
+      "max": 253.0
+    },
+    "epp_queue_p100": {
+      "mean": 0.0,
+      "max": 0.0
+    },
+    "saturation": {
+      "mean": 0.51,
+      "max": 0.8794642857142857
+    }
+  },
+  "batch_done": 36000,
+  "batch_total": 36000,
+  "batch_failed": 21013,
+  "chaos": [
+    "+120s delete 2 engines",
+    "+240s delete epp",
+    "+360s delete dispatcher"
+  ]
+}

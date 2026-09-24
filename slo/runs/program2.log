@@ -1,0 +1,4 @@
+slo-CH16b {"live_rps": 78.1, "live_errors": 774, "ttft_p50_ms": 159, "ttft_p99_ms": 334, "slo_attainment": 0.9835, "itl_p50_ms": 34.9, "batch_done": 36000, "batch_failed": 21013, "chaos": ["+120s delete 2 engines", "+240s delete epp", "+360s delete dispatcher"]} batch_rps 0.0 ttl_evicted 0 worst20s 376 sat {'mean': 0.51, 'max': 0.8794642857142857}
+slo-NC16b {"live_rps": 106.0, "live_errors": 0, "ttft_p50_ms": 238, "ttft_p99_ms": 339, "slo_attainment": 0.9999, "itl_p50_ms": 52.7, "batch_done": 9051, "batch_failed": 0, "chaos": null} batch_rps 17.7 ttl_evicted 0 worst20s 384 sat {'mean': 0.82, 'max': 0.9716796875}
+slo-BU16b {"live_rps": 77.6, "live_errors": 1, "ttft_p50_ms": 237, "ttft_p99_ms": 361, "slo_attainment": 0.9998, "itl_p50_ms": 52.1, "batch_done": 18170, "batch_failed": 0, "chaos": null} batch_rps 35.3 ttl_evicted 203 worst20s 400 sat {'mean': 0.81, 'max': 0.9150390625}
+done

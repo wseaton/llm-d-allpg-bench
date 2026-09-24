@@ -1,0 +1,51 @@
+{
+  "live_requests": 2834,
+  "live_errors": 0,
+  "live_rps": 15.2,
+  "ttft_p50_ms": 601,
+  "ttft_p90_ms": 2763,
+  "ttft_p99_ms": 5876,
+  "itl_p50_ms": 59.1,
+  "itl_p99_ms": 113.4,
+  "e2e_p50_ms": 8127,
+  "e2e_p99_ms": 13358,
+  "slo_attainment": 0.4397,
+  "window_s": 187,
+  "epp_requests": {
+    "p-10/Dispatched": 3450,
+    "p100/Dispatched": 2834
+  },
+  "epp_queue_after": {
+    "-10": 43
+  },
+  "dispatcher_deltas": {
+    "llm_d_async_async_dispatched_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 3055.0,
+    "llm_d_async_async_gate_decisions_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\",reason=\"gate_closed\"}": 37554.0,
+    "llm_d_async_async_request_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 3055.0,
+    "llm_d_async_async_successful_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 3469.0,
+    "llm_d_async_async_tokens_total{direction=\"input\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 2250181.0,
+    "llm_d_async_async_tokens_total{direction=\"output\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 444032.0
+  },
+  "samples": {
+    "engine_running": {
+      "mean": 251.33,
+      "max": 256.0
+    },
+    "engine_waiting": {
+      "mean": 0.58,
+      "max": 8.0
+    },
+    "epp_queue_p-10": {
+      "mean": 295.21,
+      "max": 891.0
+    },
+    "epp_queue_p100": {
+      "mean": 12.01,
+      "max": 103.0
+    },
+    "saturation": {
+      "mean": 0.98,
+      "max": 1.00390625
+    }
+  }
+}

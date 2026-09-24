@@ -1,0 +1,31 @@
+{
+  "live_requests": 2941,
+  "live_errors": 0,
+  "live_rps": 15.6,
+  "ttft_p50_ms": 2972,
+  "ttft_p90_ms": 5648,
+  "ttft_p99_ms": 6137,
+  "itl_p50_ms": 59.5,
+  "itl_p99_ms": 115.1,
+  "e2e_p50_ms": 10514,
+  "e2e_p99_ms": 13677,
+  "slo_attainment": 0.1377,
+  "window_s": 189,
+  "epp_requests": {
+    "p-10/Dispatched": 3407,
+    "p-10/EvictedTTL": 57,
+    "p100/Dispatched": 2941
+  },
+  "epp_queue_after": {
+    "-10": 766
+  },
+  "dispatcher_deltas": {
+    "llm_d_async_async_dispatched_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 3510.0,
+    "llm_d_async_async_request_retries_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 57.0,
+    "llm_d_async_async_request_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 3453.0,
+    "llm_d_async_async_shedded_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 57.0,
+    "llm_d_async_async_successful_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 3453.0,
+    "llm_d_async_async_tokens_total{direction=\"input\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 2239195.0,
+    "llm_d_async_async_tokens_total{direction=\"output\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 441984.0
+  }
+}

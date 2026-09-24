@@ -1,0 +1,64 @@
+{
+  "live_requests": 32369,
+  "live_errors": 1,
+  "live_rps": 76.2,
+  "ttft_p50_ms": 258,
+  "ttft_p90_ms": 590,
+  "ttft_p99_ms": 973,
+  "itl_p50_ms": 20.4,
+  "itl_p99_ms": 119.7,
+  "e2e_p50_ms": 3227,
+  "e2e_p99_ms": 4216,
+  "slo_attainment": 0.8322,
+  "window_s": 425,
+  "ttft_p99_by_20s": {
+    "0s": 915,
+    "20s": 1298,
+    "40s": 857,
+    "60s": 1166,
+    "80s": 1038,
+    "100s": 1171,
+    "120s": 722,
+    "140s": 906,
+    "160s": 832,
+    "180s": 845,
+    "200s": 985,
+    "220s": 1070,
+    "240s": 728,
+    "260s": 788,
+    "280s": 1001,
+    "300s": 752,
+    "320s": 880,
+    "340s": 1064,
+    "360s": 821,
+    "380s": 730,
+    "400s": 1033
+  },
+  "epp_requests": {
+    "p100/Dispatched": 32369
+  },
+  "epp_queue_after": {},
+  "dispatcher_deltas": {},
+  "samples": {
+    "engine_running": {
+      "mean": 234.94,
+      "max": 311.0
+    },
+    "engine_waiting": {
+      "mean": 0.03,
+      "max": 7.0
+    },
+    "epp_queue_p100": {
+      "mean": 0.0,
+      "max": 0.0
+    },
+    "saturation": {
+      "mean": 0.12,
+      "max": 0.1611328125
+    }
+  },
+  "chaos": [
+    "+120s delete pod/slo-proxy-576bb58994-76tdm",
+    "+301s delete pod/slo-proxy-576bb58994-65slh"
+  ]
+}

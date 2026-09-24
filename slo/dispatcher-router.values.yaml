@@ -1,0 +1,10 @@
+## Layer on ../dispatcher-values.yaml: batch through the router under the batch objective, no gate.
+ap:
+  transportConfig:
+    queues:
+      - queue_name: "llm-d-async:requests:sim-pool"
+        request_path_url: "/v1/chat/completions"
+        igw_base_url: "http://10.16.3.146"
+        inference_objective: "batch"
+        gate_type: "constant"
+        gate_params: {}

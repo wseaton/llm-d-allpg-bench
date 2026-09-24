@@ -1,0 +1,27 @@
+## 16-engine sizing of dispatcher-router-bounded.values.yaml: EPP batch buffer 1024 (about 20 s at
+## ~47 batch req/s), 1536 in flight (about 360 running plus the buffer), concurrency 2048 so
+## the cap binds. Layer on ../dispatcher-values.yaml.
+ap:
+  concurrency: 2048
+  prometheusCacheTTL: "250ms"
+  transportConfig:
+    queues:
+      - queue_name: "llm-d-async:requests:sim-pool"
+        request_path_url: "/v1/chat/completions"
+        igw_base_url: "http://10.16.3.146"
+        inference_objective: "batch"
+        gate_type: "composite"
+        gate_params:
+          gates:
+            - gate_type: "local-max-concurrency"
+              gate_params: {limit: 1536}
+            - gate_type: "endpoint-scrape"
+              gate_params:
+                url: "http://10.16.3.146:9090/metrics"
+                metric: "llm_d_epp_flow_control_queue_size"
+                labels: {inference_pool: "slo", priority: "-10"}
+                max_count_per_pod: 1024
+                value_type: "saturation"
+                baseline: 0
+                fallback: 0
+                absent_value: 0

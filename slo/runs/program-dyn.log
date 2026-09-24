@@ -1,0 +1,4 @@
+slo-DYN-16 {"live_rps": 77.3, "live_errors": 0, "ttft_p50_ms": 238, "ttft_p99_ms": 371, "slo_attainment": 0.9999, "batch_done": 31733, "batch_failed": 0} batch_rps 45.1 ttl_evicted 0 worst20s 398 sat {'mean': 0.81, 'max': 0.8857421875} batch_q {'mean': 740.35, 'max': 1767.0}
+slo-DYN-8 {"live_rps": 39.0, "live_errors": 0, "ttft_p50_ms": 237, "ttft_p99_ms": 323, "slo_attainment": 1.0, "batch_done": 15854, "batch_failed": 0} batch_rps 22.4 ttl_evicted 4627 worst20s 359 sat {'mean': 0.81, 'max': 0.98828125} batch_q {'mean': 1159.15, 'max': 1913.0}
+slo-DYN-scale {"live_rps": 59.1, "live_errors": 169, "ttft_p50_ms": 238, "ttft_p99_ms": 339, "slo_attainment": 0.9952, "batch_done": 24669, "batch_failed": 0} batch_rps 33.0 ttl_evicted 4031 worst20s 390 sat {'mean': 0.81, 'max': 0.8625} batch_q {'mean': 924.65, 'max': 1932.0}
+done

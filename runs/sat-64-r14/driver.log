@@ -1,0 +1,22 @@
+submitting 10 batches x 20000 = 200000 requests
+generated 99088900 bytes in 3.5s
+submitted batch=batch_77557b3b-2e1d-48c6-9ba8-5b13db9acf05 idx=5 bytes=9908890
+submitted batch=batch_fb34cf37-c147-4161-a4a7-75c47c38a777 idx=8 bytes=9908890
+submitted batch=batch_240a671c-1597-4000-95af-b6f0314fd43e idx=4 bytes=9908890
+submitted batch=batch_2d2bae75-dce0-4f14-91a8-8dd174f87442 idx=3 bytes=9908890
+submitted batch=batch_b172818d-7e86-4006-8ba8-4a7df93ebf04 idx=6 bytes=9908890
+submitted batch=batch_e352be7d-b269-4b27-a773-260e838d6bdb idx=1 bytes=9908890
+submitted batch=batch_245e4ea2-9fbe-4abd-ac23-514efa1fbf7a idx=2 bytes=9908890
+submitted batch=batch_d469739f-e281-409e-a58f-e1fbf4529b43 idx=0 bytes=9908890
+submitted batch=batch_88d16195-f182-4e56-ab44-43b3aeddfc95 idx=7 bytes=9908890
+submitted batch=batch_cd500b76-ac2c-49a4-9f2c-4d5fb047990f idx=9 bytes=9908890
+all batches submitted in 0.2s ids=10
+SAMPLE t=0.0 done=0/200000 rate=0.0 terminal=0 failed=0
+SAMPLE t=2.0 done=0/200000 rate=0.0 terminal=0 failed=0
+SAMPLE t=4.0 done=0/200000 rate=0.0 terminal=0 failed=0
+SAMPLE t=6.0 done=0/200000 rate=0.0 terminal=0 failed=0
+SAMPLE t=8.0 done=100000/200000 rate=49850.6 terminal=5 failed=0
+SAMPLE t=10.0 done=100000/200000 rate=0.0 terminal=5 failed=0
+SAMPLE t=12.0 done=140000/200000 rate=19940.6 terminal=7 failed=0
+SAMPLE t=14.0 done=200000/200000 rate=29914.6 terminal=10 failed=0
+RESULT steady_state_median_rps=0.0 steady_state_mean_rps=9970.1 peak_rps=49850.6 total_done=200000 elapsed=14.0 submit_elapsed=0.2 drain_rps=14237.3 e2e_rps=14028.9 failed=0

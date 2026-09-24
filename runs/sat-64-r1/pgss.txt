@@ -1,0 +1,15 @@
+66537 ms | 200037 calls | 0.33 ms/call | WITH picked AS MATERIALIZED ( SELECT seq FROM async_results WHERE route = $1 ORDER BY seq LIMIT $2 FOR UPDATE 
+37197 ms | 4000 calls | 9.30 ms/call | WITH input AS ( SELECT * FROM unnest($2::text[], $3::text[], $4::bigint[], $5::text[], $6::text[], $7::bigint[
+34697 ms | 30035 calls | 1.16 ms/call | WITH picked AS MATERIALIZED ( SELECT r.id, r.request_token FROM async_requests r JOIN async_partitions q ON q.
+4448 ms | 790 calls | 5.63 ms/call | INSERT INTO async_requests (id, request_token, queue, partition_id, deadline, envelope, payload, created_at) S
+2768 ms | 2733 calls | 1.01 ms/call | SELECT r.id, r.request_token FROM async_requests r JOIN unnest($1::text[], $2::text[]) AS k(id, request_token)
+267 ms | 200037 calls | 0.00 ms/call | DELETE FROM async_results WHERE route = $1 AND expires_at > 0 AND expires_at < $2
+170 ms | 14 calls | 12.17 ms/call | SELECT COUNT(*), COUNT(*) FILTER (WHERE deadline <= $2), COUNT(*) FILTER (WHERE deadline <= $3), COUNT(*) FILT
+20 ms | 980 calls | 0.02 ms/call | SELECT id, tenant_id, expiry, tags, processor_id, priority, epoch, recovery_attempts, status, spec FROM batch_
+17 ms | 1 calls | 16.58 ms/call | SELECT $1 || count(*) || $2 || string_agg(DISTINCT route, $3) FROM async_results
+8 ms | 2 calls | 4.13 ms/call | WITH stale AS MATERIALIZED ( SELECT r.id, r.request_token FROM async_requests r JOIN async_partitions p ON p.q
+4 ms | 61 calls | 0.06 ms/call | UPDATE batch_items SET status = jsonb_set(COALESCE(status, $4::jsonb), $5, $1::jsonb, $6) WHERE id = $2 AND st
+2 ms | 20 calls | 0.10 ms/call | INSERT INTO file_items (id, tenant_id, expiry, tags, purpose, spec, status) VALUES ($1, $2, $3, $4, $5, $6, $7
+2 ms | 59 calls | 0.03 ms/call | WITH claimed AS ( SELECT id FROM batch_items WHERE processor_id IS NULL AND status IS NOT NULL AND status::jso
+2 ms | 22 calls | 0.09 ms/call | UPDATE async_partitions SET lease_expires_ms = $3 WHERE queue = $1 AND owner = $2 RETURNING partition_id, epoc
+1 ms | 30 calls | 0.05 ms/call | UPDATE batch_items SET status = $1 WHERE id = $2 AND epoch = $3

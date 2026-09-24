@@ -1,0 +1,17 @@
+apiVersion: llm-d.ai/v1alpha2
+kind: InferenceObjective
+metadata:
+  name: live
+spec:
+  priority: 100
+  poolRef:
+    name: slo
+---
+apiVersion: llm-d.ai/v1alpha2
+kind: InferenceObjective
+metadata:
+  name: batch
+spec:
+  priority: -10
+  poolRef:
+    name: slo

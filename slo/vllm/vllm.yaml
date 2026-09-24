@@ -1,0 +1,90 @@
+# 8 x Qwen3-32B TP1 on one H200 each, the real-engine pool for the SLO runs. On SIGTERM the
+# engine drains in-flight requests for up to 60 s (--shutdown-timeout) before aborting the
+# rest; the preStop delay lets the router drop the pod before the drain starts, and the grace
+# period covers both. Served as "sim-model" too, the name the batch driver and nyann send.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qwen-slo
+  labels: {app: vllm-slo}
+spec:
+  replicas: 8
+  selector:
+    matchLabels: {app: vllm-slo}
+  template:
+    metadata:
+      labels:
+        app: vllm-slo
+        llm-d.ai/role: decode
+        llm-d.ai/engine-type: vllm
+    spec:
+      terminationGracePeriodSeconds: 90
+      containers:
+        - name: modelserver
+          image: vllm/vllm-openai:v0.30.0
+          imagePullPolicy: IfNotPresent
+          command: ["vllm", "serve"]
+          args:
+            - "Qwen/Qwen3-32B"
+            - "--served-model-name=Qwen/Qwen3-32B"
+            - "--served-model-name=sim-model"
+            - "--tensor-parallel-size=1"
+            - "--max-model-len=8192"
+            - "--gpu-memory-utilization=0.85"
+            - "--shutdown-timeout=60"
+            - "--disable-access-log-for-endpoints=/health,/metrics,/v1/models"
+            - "--enable-prompt-tokens-details"
+          env:
+            - name: HF_TOKEN
+              valueFrom:
+                secretKeyRef: {name: llm-d-hf-token, key: HF_TOKEN}
+            - {name: HF_HOME, value: /hf-cache}
+            - {name: HF_HUB_OFFLINE, value: "1"}
+            - {name: USER, value: llm-d}
+          ports:
+            - {name: modelserver, containerPort: 8000, protocol: TCP}
+          lifecycle:
+            preStop:
+              sleep: {seconds: 5}
+          resources:
+            limits: {cpu: "16", memory: 128Gi, nvidia.com/gpu: 1}
+            requests: {cpu: "8", memory: 96Gi, nvidia.com/gpu: 1}
+          startupProbe:
+            httpGet: {path: /v1/models, port: modelserver}
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 180
+          livenessProbe:
+            httpGet: {path: /health, port: modelserver}
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet: {path: /v1/models, port: modelserver}
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 3
+          volumeMounts:
+            - {mountPath: /dev/shm, name: shm}
+            - {mountPath: /hf-cache, name: hf-cache}
+            - {mountPath: /.cache, name: compile-cache}
+            - {mountPath: /.triton, name: triton-cache}
+            - {mountPath: /.config, name: vllm-config}
+      volumes:
+        - name: shm
+          emptyDir: {medium: Memory, sizeLimit: 20Gi}
+        - name: hf-cache
+          persistentVolumeClaim: {claimName: qwen3-32b-weights}
+        - {name: compile-cache, emptyDir: {}}
+        - {name: triton-cache, emptyDir: {}}
+        - {name: vllm-config, emptyDir: {}}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: qwen-slo
+spec:
+  selector: {app: vllm-slo}
+  ports:
+    - {name: http, port: 8000, targetPort: modelserver}

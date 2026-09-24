@@ -1,0 +1,47 @@
+global:
+  secretName: batch-gateway-secrets
+  fileClient:
+    type: fs
+    fs:
+      basePath: /var/lib/batch-gateway/files
+      pvcName: batch-files
+apiserver:
+  replicaCount: 2
+  nodeSelector: {kubernetes.io/hostname: gff1e4a}
+  image:
+    repository: quay.io/wseaton/batch-gateway-apiserver
+    tag: allpg-4
+    pullPolicy: IfNotPresent
+  resources:
+    requests: {cpu: "2", memory: 4Gi}
+    limits: {cpu: "8", memory: 8Gi}
+processor:
+  replicaCount: 1
+  nodeSelector: {kubernetes.io/hostname: gff1e4a}
+  image:
+    repository: quay.io/wseaton/batch-gateway-processor
+    tag: allpg-4
+    pullPolicy: IfNotPresent
+  resources:
+    requests: {cpu: "3", memory: 8Gi}
+    limits: {cpu: "12", memory: 16Gi}
+  config:
+    dispatchMode: async
+    numWorkers: 200
+    pollInterval: 1s
+    taskWaitTime: 100ms
+    concurrency:
+      global: 4000
+      perEndpoint: 2000
+      aimd:
+        enabled: false
+    asyncDispatch:
+      transport: sql
+      resultPollTimeout: 30s
+      models:
+        sim-model:
+          inferencePoolName: sim-pool
+          requestQueueName: llm-d-async:requests:sim-pool
+          resultQueueName: llm-d-async:results:sim-pool
+gc:
+  enabled: false

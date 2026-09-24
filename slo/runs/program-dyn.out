@@ -1,0 +1,267 @@
+{
+  "live_requests": 47054,
+  "live_errors": 0,
+  "live_rps": 77.3,
+  "ttft_p50_ms": 238,
+  "ttft_p90_ms": 287,
+  "ttft_p99_ms": 371,
+  "itl_p50_ms": 52.0,
+  "itl_p99_ms": 94.4,
+  "e2e_p50_ms": 6864,
+  "e2e_p99_ms": 7646,
+  "slo_attainment": 0.9999,
+  "window_s": 609,
+  "ttft_p99_by_20s": {
+    "0s": 354,
+    "20s": 378,
+    "40s": 372,
+    "60s": 398,
+    "80s": 365,
+    "100s": 392,
+    "120s": 364,
+    "140s": 381,
+    "160s": 337,
+    "180s": 381,
+    "200s": 386,
+    "220s": 368,
+    "240s": 361,
+    "260s": 365,
+    "280s": 354,
+    "300s": 353,
+    "320s": 379,
+    "340s": 354,
+    "360s": 372,
+    "380s": 382,
+    "400s": 370,
+    "420s": 362,
+    "440s": 382,
+    "460s": 352,
+    "480s": 387,
+    "500s": 370,
+    "520s": 347,
+    "540s": 380,
+    "560s": 370,
+    "580s": 382
+  },
+  "epp_requests": {
+    "p-10/Dispatched": 27488,
+    "p100/Dispatched": 47054
+  },
+  "epp_queue_after": {
+    "-10": 839
+  },
+  "dispatcher_deltas": {
+    "llm_d_async_async_dispatched_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 27015.0,
+    "llm_d_async_async_gate_decisions_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\",reason=\"gate_closed\"}": 115402.0,
+    "llm_d_async_async_request_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 27015.0,
+    "llm_d_async_async_successful_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 27467.0,
+    "llm_d_async_async_tokens_total{direction=\"input\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 17810315.0,
+    "llm_d_async_async_tokens_total{direction=\"output\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 3515776.0
+  },
+  "samples": {
+    "engine_running": {
+      "mean": 823.57,
+      "max": 900.0
+    },
+    "engine_waiting": {
+      "mean": 2.54,
+      "max": 23.0
+    },
+    "epp_queue_p-10": {
+      "mean": 740.35,
+      "max": 1767.0
+    },
+    "epp_queue_p100": {
+      "mean": 0.01,
+      "max": 1.0
+    },
+    "saturation": {
+      "mean": 0.81,
+      "max": 0.8857421875
+    }
+  },
+  "batch_done": 31733,
+  "batch_total": 36000,
+  "batch_failed": 0
+}
+{
+  "live_requests": 23728,
+  "live_errors": 0,
+  "live_rps": 39.0,
+  "ttft_p50_ms": 237,
+  "ttft_p90_ms": 276,
+  "ttft_p99_ms": 323,
+  "itl_p50_ms": 52.1,
+  "itl_p99_ms": 95.6,
+  "e2e_p50_ms": 6853,
+  "e2e_p99_ms": 7623,
+  "slo_attainment": 1.0,
+  "window_s": 608,
+  "ttft_p99_by_20s": {
+    "0s": 323,
+    "20s": 314,
+    "40s": 324,
+    "60s": 337,
+    "80s": 316,
+    "100s": 337,
+    "120s": 359,
+    "140s": 333,
+    "160s": 307,
+    "180s": 317,
+    "200s": 328,
+    "220s": 329,
+    "240s": 311,
+    "260s": 310,
+    "280s": 326,
+    "300s": 321,
+    "320s": 318,
+    "340s": 321,
+    "360s": 357,
+    "380s": 322,
+    "400s": 319,
+    "420s": 323,
+    "440s": 313,
+    "460s": 333,
+    "480s": 324,
+    "500s": 321,
+    "520s": 322,
+    "540s": 331,
+    "560s": 306,
+    "580s": 329
+  },
+  "epp_requests": {
+    "p-10/Dispatched": 13619,
+    "p-10/EvictedTTL": 4627,
+    "p100/Dispatched": 23728
+  },
+  "epp_queue_after": {
+    "-10": 279
+  },
+  "dispatcher_deltas": {
+    "llm_d_async_async_dispatched_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 18214.0,
+    "llm_d_async_async_gate_decisions_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\",reason=\"gate_closed\"}": 116922.0,
+    "llm_d_async_async_request_retries_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 4627.0,
+    "llm_d_async_async_request_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 14259.0,
+    "llm_d_async_async_shedded_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 4627.0,
+    "llm_d_async_async_successful_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 13674.0,
+    "llm_d_async_async_tokens_total{direction=\"input\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 8866776.0,
+    "llm_d_async_async_tokens_total{direction=\"output\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 1750272.0
+  },
+  "samples": {
+    "engine_running": {
+      "mean": 414.56,
+      "max": 506.0
+    },
+    "engine_waiting": {
+      "mean": 0.53,
+      "max": 9.0
+    },
+    "epp_queue_p-10": {
+      "mean": 1159.15,
+      "max": 1913.0
+    },
+    "epp_queue_p100": {
+      "mean": 0.0,
+      "max": 0.0
+    },
+    "saturation": {
+      "mean": 0.81,
+      "max": 0.98828125
+    }
+  },
+  "batch_done": 15854,
+  "batch_total": 18000,
+  "batch_failed": 0
+}
+{
+  "live_requests": 35935,
+  "live_errors": 169,
+  "live_rps": 59.1,
+  "ttft_p50_ms": 238,
+  "ttft_p90_ms": 280,
+  "ttft_p99_ms": 339,
+  "itl_p50_ms": 52.1,
+  "itl_p99_ms": 95.2,
+  "e2e_p50_ms": 6859,
+  "e2e_p99_ms": 7664,
+  "slo_attainment": 0.9952,
+  "window_s": 608,
+  "ttft_p99_by_20s": {
+    "0s": 381,
+    "20s": 377,
+    "40s": 349,
+    "60s": 352,
+    "80s": 355,
+    "100s": 341,
+    "120s": 390,
+    "140s": 373,
+    "160s": 364,
+    "180s": 364,
+    "200s": 313,
+    "220s": 321,
+    "240s": 314,
+    "260s": 326,
+    "280s": 313,
+    "300s": 317,
+    "320s": 320,
+    "340s": 328,
+    "360s": 327,
+    "380s": 314,
+    "400s": 334,
+    "420s": 323,
+    "440s": 312,
+    "460s": 337,
+    "480s": 318,
+    "500s": 317,
+    "520s": 313,
+    "540s": 321,
+    "560s": 334,
+    "580s": 323
+  },
+  "epp_requests": {
+    "p-10/Dispatched": 20074,
+    "p-10/EvictedTTL": 4031,
+    "p100/Dispatched": 35935
+  },
+  "epp_queue_after": {
+    "-10": 435
+  },
+  "dispatcher_deltas": {
+    "llm_d_async_async_dispatched_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 23935.0,
+    "llm_d_async_async_gate_decisions_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\",reason=\"gate_closed\"}": 115809.0,
+    "llm_d_async_async_request_retries_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 4199.0,
+    "llm_d_async_async_request_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 20673.0,
+    "llm_d_async_async_shedded_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 4031.0,
+    "llm_d_async_async_successful_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 20156.0,
+    "llm_d_async_async_tokens_total{direction=\"input\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 13068975.0,
+    "llm_d_async_async_tokens_total{direction=\"output\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 2579968.0
+  },
+  "samples": {
+    "engine_running": {
+      "mean": 695.73,
+      "max": 880.0
+    },
+    "engine_waiting": {
+      "mean": 2.57,
+      "max": 27.0
+    },
+    "epp_queue_p-10": {
+      "mean": 924.65,
+      "max": 1932.0
+    },
+    "epp_queue_p100": {
+      "mean": 0.01,
+      "max": 1.0
+    },
+    "saturation": {
+      "mean": 0.81,
+      "max": 0.8625
+    }
+  },
+  "batch_done": 24669,
+  "batch_total": 30000,
+  "batch_failed": 0,
+  "chaos": [
+    "+200s scale 16->10"
+  ]
+}

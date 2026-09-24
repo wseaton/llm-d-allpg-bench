@@ -1,0 +1,49 @@
+# Qwen3-32B weights on a shared VAST volume, mounted as the model server's HF cache so pods
+# on any node start without a download. The Job fills it once; reapplying a completed Job
+# is a no-op.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: qwen3-32b-weights
+spec:
+  accessModes: [ReadWriteMany]
+  storageClassName: shared-vast
+  resources:
+    requests:
+      storage: 200Gi
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: qwen3-32b-weights-download
+spec:
+  backoffLimit: 3
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: download
+          image: vllm/vllm-openai:v0.30.0
+          command: ["python3", "-c"]
+          args:
+            - |
+              from huggingface_hub import snapshot_download
+              path = snapshot_download("Qwen/Qwen3-32B", max_workers=16)
+              print("weights at", path, flush=True)
+          env:
+            - name: HF_HOME
+              value: /hf-cache
+            - name: HF_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: llm-d-hf-token
+                  key: HF_TOKEN
+          resources:
+            requests: {cpu: "8", memory: 16Gi}
+            limits: {memory: 32Gi}
+          volumeMounts:
+            - {mountPath: /hf-cache, name: hf-cache}
+      volumes:
+        - name: hf-cache
+          persistentVolumeClaim:
+            claimName: qwen3-32b-weights

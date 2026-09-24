@@ -1,0 +1,123 @@
+time=2026-09-24T05:34:55.433Z level=ERROR msg="Aborting: too many consecutive request errors" count=5 threshold=5 last_error="HTTP 429: inference error: ResourceExhausted - request rejected pre-queue: queue at capacity"
+
+  CONC      OK    ERR    TOT_TOK      TOK/S    TTFT_AVG    TTFT_P10    TTFT_P50    TTFT_P95    TTFT_P99     ITL_P10     ITL_P50     ITL_P95     ITL_P99
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+    10   17147      6    2168639    15593.3       6.45s       1.35s       6.64s      12.33s      13.17s      55.0ms      59.4ms      65.8ms     114.3ms
+
+=== Benchmark Results ===
+Requests:       17153 total, 17147 ok, 6 errors
+Conversations:  17153 (avg 1.0 turns)
+Duration:       139.1s
+Throughput:     123.3 req/s, 15593 output tok/s
+Tokens:         0 prompt, 2168639 output
+
+TTFT (ms):      mean=6448.7  p50=6635.6  p90=11720.9  p99=13173.3  min=159.0  max=16136.8
+ITL  (ms):      mean=60.11  p50=59.45  p90=64.05  p99=114.31  min=23.91  max=247.97
+E2E  (ms):      mean=13990.4  p50=14179.3  p90=19244.2  p99=20738.9  min=6057.8  max=23634.1
+{
+  "total_requests": 17153,
+  "successful_requests": 17147,
+  "error_requests": 6,
+  "total_duration_seconds": 139.07528066635132,
+  "requests_per_second": 123.29293831257135,
+  "total_output_tokens": 2168639,
+  "total_prompt_tokens": 0,
+  "output_tokens_per_second": 15593.274301582574,
+  "ttft_ms": {
+    "mean": 6448.734388305149,
+    "p10": 1345.2845364,
+    "p50": 6635.622920000001,
+    "p90": 11720.9160676,
+    "p95": 12325.7269737,
+    "p99": 13173.304472880001,
+    "min": 158.977229,
+    "max": 16136.827135000001
+  },
+  "itl_ms": {
+    "mean": 60.105222907655396,
+    "p10": 55.0118731,
+    "p50": 59.4467535,
+    "p90": 64.05066,
+    "p95": 65.81341599999999,
+    "p99": 114.31485267999976,
+    "min": 23.909550000000003,
+    "max": 247.968305
+  },
+  "e2e_latency_ms": {
+    "mean": 13990.350258526749,
+    "p10": 8885.3458396,
+    "p50": 14179.299008,
+    "p90": 19244.198375399996,
+    "p95": 19865.5760969,
+    "p99": 20738.89106894,
+    "min": 6057.800665000001,
+    "max": 23634.056978
+  },
+  "conversations": 17153,
+  "turns_per_conversation": {
+    "mean": 1,
+    "p10": 1,
+    "p50": 1,
+    "p90": 1,
+    "p95": 1,
+    "p99": 1,
+    "min": 1,
+    "max": 1
+  },
+  "timestamps": {
+    "start_time": 1790227956.3477979,
+    "rampup_end_time": 1790227956.3477979,
+    "end_time": 1790228095.4504538,
+    "rampup_duration_seconds": 0,
+    "total_duration_seconds": 139.102655829,
+    "stages": [
+      {
+        "stage": 0,
+        "concurrency": 10,
+        "start_time": 1790227956.3477979,
+        "end_time": 1790228095.4504538
+      }
+    ]
+  },
+  "stages": [
+    {
+      "concurrency": 10,
+      "total_requests": 17153,
+      "successful_requests": 17147,
+      "error_requests": 6,
+      "duration_seconds": 139.07528066635132,
+      "total_output_tokens": 2168639,
+      "output_tokens_per_second": 15593.274301582574,
+      "ttft_ms": {
+        "mean": 6448.734388305149,
+        "p10": 1345.2845364,
+        "p50": 6635.622920000001,
+        "p90": 11720.9160676,
+        "p95": 12325.7269737,
+        "p99": 13173.304472880001,
+        "min": 158.977229,
+        "max": 16136.827135000001
+      },
+      "itl_ms": {
+        "mean": 60.105222907655396,
+        "p10": 55.0118731,
+        "p50": 59.4467535,
+        "p90": 64.05066,
+        "p95": 65.81341599999999,
+        "p99": 114.31485267999976,
+        "min": 23.909550000000003,
+        "max": 247.968305
+      },
+      "e2e_latency_ms": {
+        "mean": 13990.350258526749,
+        "p10": 8885.3458396,
+        "p50": 14179.299008,
+        "p90": 19244.198375399996,
+        "p95": 19865.5760969,
+        "p99": 20738.89106894,
+        "min": 6057.800665000001,
+        "max": 23634.056978
+      }
+    }
+  ]
+}

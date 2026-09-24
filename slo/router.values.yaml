@@ -1,0 +1,61 @@
+## Layer on guides/recipes/router/base.values.yaml. Release name "slo" names the pool.
+router:
+  extraServicePorts:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 8081
+  epp:
+    flags:
+      v: 2
+    pluginsConfigFile: "slo-plugins.yaml"
+    pluginsCustomConfig:
+      slo-plugins.yaml: |
+        apiVersion: llm-d.ai/v1alpha1
+        kind: EndpointPickerConfig
+        featureGates:
+        - flowControl
+        plugins:
+        - type: queue-scorer
+        - type: kv-cache-utilization-scorer
+        - type: global-strict-fairness-policy
+        - type: fcfs-ordering-policy
+        - type: concurrency-detector
+          parameters:
+            maxConcurrency: 64
+            concurrencyMode: requests
+            headroom: 0.0
+        schedulingProfiles:
+        - name: default
+          plugins:
+          - pluginRef: queue-scorer
+            weight: 2
+          - pluginRef: kv-cache-utilization-scorer
+            weight: 2
+        flowControl:
+          maxBytes: "10Gi"
+          maxRequests: "20k"
+          defaultRequestTTL: "60s"
+          saturationDetector:
+            pluginRef: concurrency-detector
+          priorityBands:
+          - priority: 100
+            maxRequests: "2k"
+            fairnessPolicyRef: global-strict-fairness-policy
+            orderingPolicyRef: fcfs-ordering-policy
+          - priority: 0
+            maxRequests: "2k"
+            fairnessPolicyRef: global-strict-fairness-policy
+            orderingPolicyRef: fcfs-ordering-policy
+          - priority: -10
+            maxRequests: "10k"
+            fairnessPolicyRef: global-strict-fairness-policy
+            orderingPolicyRef: fcfs-ordering-policy
+  modelServers:
+    matchLabels:
+      app: vcr
+  monitoring:
+    prometheus:
+      enabled: false
+      auth:
+        enabled: false

@@ -1,0 +1,53 @@
+{
+  "live_requests": 2897,
+  "live_errors": 1,
+  "live_rps": 15.4,
+  "ttft_p50_ms": 219,
+  "ttft_p90_ms": 253,
+  "ttft_p99_ms": 283,
+  "itl_p50_ms": 48.2,
+  "itl_p99_ms": 89.0,
+  "e2e_p50_ms": 6316,
+  "e2e_p99_ms": 7210,
+  "slo_attainment": 0.9997,
+  "window_s": 188,
+  "epp_requests": {
+    "p-10/Dispatched": 2647,
+    "p-10/EvictedTTL": 458,
+    "p100/Dispatched": 2897
+  },
+  "epp_queue_after": {
+    "-10": 843
+  },
+  "dispatcher_deltas": {
+    "llm_d_async_async_dispatched_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 3098.0,
+    "llm_d_async_async_request_retries_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 458.0,
+    "llm_d_async_async_request_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 2640.0,
+    "llm_d_async_async_shedded_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 458.0,
+    "llm_d_async_async_successful_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 2640.0,
+    "llm_d_async_async_tokens_total{direction=\"input\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 1711763.0,
+    "llm_d_async_async_tokens_total{direction=\"output\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 337920.0
+  },
+  "samples": {
+    "engine_running": {
+      "mean": 183.16,
+      "max": 197.0
+    },
+    "engine_waiting": {
+      "mean": 0.02,
+      "max": 1.0
+    },
+    "epp_queue_p-10": {
+      "mean": 937.76,
+      "max": 965.0
+    },
+    "epp_queue_p100": {
+      "mean": 0.0,
+      "max": 0.0
+    },
+    "saturation": {
+      "mean": 0.72,
+      "max": 0.76953125
+    }
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "live_requests": 46985,
+  "live_errors": 1,
+  "live_rps": 77.2,
+  "ttft_p50_ms": 238,
+  "ttft_p90_ms": 286,
+  "ttft_p99_ms": 370,
+  "itl_p50_ms": 51.9,
+  "itl_p99_ms": 94.3,
+  "e2e_p50_ms": 6842,
+  "e2e_p99_ms": 7631,
+  "slo_attainment": 0.9997,
+  "window_s": 609,
+  "ttft_p99_by_20s": {
+    "0s": 367,
+    "20s": 366,
+    "40s": 375,
+    "60s": 364,
+    "80s": 368,
+    "100s": 353,
+    "120s": 375,
+    "140s": 367,
+    "160s": 381,
+    "180s": 398,
+    "200s": 353,
+    "220s": 356,
+    "240s": 358,
+    "260s": 373,
+    "280s": 372,
+    "300s": 371,
+    "320s": 373,
+    "340s": 349,
+    "360s": 372,
+    "380s": 354,
+    "400s": 371,
+    "420s": 358,
+    "440s": 377,
+    "460s": 376,
+    "480s": 384,
+    "500s": 369,
+    "520s": 366,
+    "540s": 372,
+    "560s": 381,
+    "580s": 386
+  },
+  "epp_requests": {
+    "p-10/Dispatched": 27437,
+    "p100/Dispatched": 46985
+  },
+  "epp_queue_after": {},
+  "dispatcher_deltas": {
+    "llm_d_async_async_dispatched_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 27360.0,
+    "llm_d_async_async_gate_decisions_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\",reason=\"gate_closed\"}": 113882.0,
+    "llm_d_async_async_request_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 27360.0,
+    "llm_d_async_async_successful_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 27360.0,
+    "llm_d_async_async_tokens_total{direction=\"input\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 17738921.0,
+    "llm_d_async_async_tokens_total{direction=\"output\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 3502080.0
+  },
+  "samples": {
+    "engine_running": {
+      "mean": 817.3,
+      "max": 881.0
+    },
+    "engine_waiting": {
+      "mean": 2.88,
+      "max": 28.0
+    },
+    "epp_queue_p-10": {
+      "mean": 169.06,
+      "max": 257.0
+    },
+    "epp_queue_p100": {
+      "mean": 0.0,
+      "max": 0.0
+    },
+    "saturation": {
+      "mean": 0.8,
+      "max": 0.8564453125
+    }
+  },
+  "batch_done": 36000,
+  "batch_total": 36000,
+  "batch_failed": 0
+}

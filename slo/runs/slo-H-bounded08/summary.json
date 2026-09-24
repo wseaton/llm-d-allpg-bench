@@ -1,0 +1,62 @@
+{
+  "live_requests": 2899,
+  "live_errors": 0,
+  "live_rps": 15.4,
+  "ttft_p50_ms": 236,
+  "ttft_p90_ms": 270,
+  "ttft_p99_ms": 301,
+  "itl_p50_ms": 51.9,
+  "itl_p99_ms": 96.7,
+  "e2e_p50_ms": 6835,
+  "e2e_p99_ms": 7493,
+  "slo_attainment": 1.0,
+  "window_s": 188,
+  "ttft_p99_by_20s": {
+    "0s": 297,
+    "20s": 297,
+    "40s": 300,
+    "60s": 289,
+    "80s": 297,
+    "100s": 297,
+    "120s": 301,
+    "140s": 307,
+    "160s": 316
+  },
+  "epp_requests": {
+    "p-10/Dispatched": 3009,
+    "p100/Dispatched": 2899
+  },
+  "epp_queue_after": {
+    "-10": 177
+  },
+  "dispatcher_deltas": {
+    "llm_d_async_async_dispatched_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 3021.0,
+    "llm_d_async_async_gate_decisions_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\",reason=\"gate_closed\"}": 36669.0,
+    "llm_d_async_async_request_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 3021.0,
+    "llm_d_async_async_successful_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 3021.0,
+    "llm_d_async_async_tokens_total{direction=\"input\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 1959286.0,
+    "llm_d_async_async_tokens_total{direction=\"output\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 386688.0
+  },
+  "samples": {
+    "engine_running": {
+      "mean": 207.43,
+      "max": 225.0
+    },
+    "engine_waiting": {
+      "mean": 0.08,
+      "max": 2.0
+    },
+    "epp_queue_p-10": {
+      "mean": 265.08,
+      "max": 298.0
+    },
+    "epp_queue_p100": {
+      "mean": 0.0,
+      "max": 0.0
+    },
+    "saturation": {
+      "mean": 0.81,
+      "max": 0.87890625
+    }
+  }
+}

@@ -1,0 +1,31 @@
+## 16-engine bounds sized to the gate's reaction time, not a backlog: EPP batch buffer 128
+## (~0.5 s of gate lag at ~47 batch req/s, with slack) and 512 in flight (~310 running at
+## 80 req/s live, plus the buffer). Layer on ../dispatcher-values.yaml. Image: local branch
+## sql-transport-retry (transport errors retry with backoff). Active-passive router: traffic to
+## slo-proxy, gate on the primary EPP (slo-epp-0); while it is down the gate fails closed.
+ap:
+  image:
+    tag: allpg-5-retry
+  concurrency: 2048
+  prometheusCacheTTL: "250ms"
+  transportConfig:
+    queues:
+      - queue_name: "llm-d-async:requests:sim-pool"
+        request_path_url: "/v1/chat/completions"
+        igw_base_url: "http://10.16.3.16"
+        inference_objective: "batch"
+        gate_type: "composite"
+        gate_params:
+          gates:
+            - gate_type: "local-max-concurrency"
+              gate_params: {limit: 512}
+            - gate_type: "endpoint-scrape"
+              gate_params:
+                url: "http://slo-epp-0.slo-epp-headless.allpg-bench.svc.cluster.local:9090/metrics"
+                metric: "llm_d_epp_flow_control_queue_size"
+                labels: {inference_pool: "slo", priority: "-10"}
+                max_count_per_pod: 128
+                value_type: "saturation"
+                baseline: 0
+                fallback: 0
+                absent_value: 0

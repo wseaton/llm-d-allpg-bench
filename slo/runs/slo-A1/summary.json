@@ -1,0 +1,19 @@
+{
+  "live_requests": 2833,
+  "live_errors": 0,
+  "live_rps": 15.4,
+  "ttft_p50_ms": 128,
+  "ttft_p90_ms": 149,
+  "ttft_p99_ms": 166,
+  "itl_p50_ms": 27.7,
+  "itl_p99_ms": 50.1,
+  "e2e_p50_ms": 3633,
+  "e2e_p99_ms": 3963,
+  "slo_attainment": 1.0,
+  "window_s": 184,
+  "epp_requests": {
+    "p100/Dispatched": 2833
+  },
+  "epp_queue_after": {},
+  "dispatcher_deltas": {}
+}
