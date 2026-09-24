@@ -2,7 +2,7 @@
 # (the gateway's files bucket on SeaweedFS) for bodies returned by reference.
 ap:
   image:
-    tag: allpg-10-blobref
+    tag: allpg-11-stream
   resultStore:
     s3:
       bucket: batch-files
