@@ -1,7 +1,7 @@
 ap:
   image:
     repository: quay.io/wseaton/llm-d-async
-    tag: allpg-4
+    tag: allpg-6-counted
   imagePullPolicy: IfNotPresent
   concurrency: 1024
   affinity:

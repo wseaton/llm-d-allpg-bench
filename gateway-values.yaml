@@ -10,7 +10,7 @@ apiserver:
   nodeSelector: {kubernetes.io/hostname: gff1e4a}
   image:
     repository: quay.io/wseaton/batch-gateway-apiserver
-    tag: allpg-4
+    tag: allpg-9-rebased
     pullPolicy: IfNotPresent
   resources:
     requests: {cpu: "2", memory: 4Gi}
@@ -20,7 +20,7 @@ processor:
   nodeSelector: {kubernetes.io/hostname: gff1e4a}
   image:
     repository: quay.io/wseaton/batch-gateway-processor
-    tag: allpg-4
+    tag: allpg-9-rebased
     pullPolicy: IfNotPresent
   resources:
     requests: {cpu: "3", memory: 8Gi}

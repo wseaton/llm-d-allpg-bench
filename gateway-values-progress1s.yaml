@@ -1,0 +1,5 @@
+# Layer on gateway-values.yaml for throughput runs: write batch progress every second instead
+# of #676's 15 s default, so the driver's per-second samples show real progress.
+processor:
+  config:
+    progressUpdateInterval: "1s"

@@ -1,0 +1,6 @@
+# Layer on gateway-values.yaml: the gateway control plane stays on Postgres, async dispatch
+# goes through llm-d-async's redis-sortedset transport (redis-url in batch-gateway-secrets).
+processor:
+  config:
+    asyncDispatch:
+      transport: redis-sortedset

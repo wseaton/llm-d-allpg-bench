@@ -227,3 +227,50 @@ Accepted limitation: active-passive EPP failback. A restarted primary takes traf
 without the standby's in-flight state, costing ~20 s of live TTFT above SLO (~1000 requests at
 80 req/s) once per primary restart. Fixing it needs cross-replica in-flight sync in the router
 (upstream ships only a no-op syncer). priority-holdback is still alpha.
+
+## Transport A/B: Postgres control plane, sql vs redis-sortedset async transport (2026-09-24)
+
+Gateway control plane on Postgres (#676) either way; only llm-d-async dispatch moves. Redis 7.4 on
+the Postgres node with the same 8 cores (`redis.yaml`, appendonly off, 8 io-threads). Both
+transports on identical images: gateway `allpg-8-batchsubmit` (batched redis result reads and
+submits, submit batching on every transport), dispatcher `allpg-6-counted`, poll 5 ms, batch 256,
+1024 workers. `tput-ab.sh`: 200k requests (10 x 20k, 64-token prompts), 4 zero-latency vcr
+engines, reps alternating transports.
+
+| Rep | sql e2e req/s | redis-sortedset e2e req/s |
+|---|---|---|
+| 1 | 4,129 (first run after deploy) | 2,684 |
+| 2 | 12,273 | 2,684 |
+| 3 | 13,922 | 2,746 |
+
+No failures on either. Redis server time is ~4 s of each 74 s run and no pod is CPU-bound: the
+redis transport's `requestWorker` handles each peeked request serially (cancellation `GET`s,
+claim round trip, unbuffered hand-off), 3-4 round trips per request on one goroutine per queue,
+which caps it near 2.7k req/s per dispatcher. The sql transport batches its claims and
+cancellation checks per poll. Before the gateway parity changes (`tpv1-*`): redis 2,423 req/s,
+with one MULTI/EXEC per submitted request (200,007 EXECs; 796 after).
+
+### SLO battery by transport (rebased gateway `allpg-9-rebased`, `program-transport.sh`)
+
+16 vcr engines, holdback 0.8, active-passive router with the per-request proxy drain, counted
+admission. Each scenario ran on sql then redis back to back.
+
+| Scenario | Transport | Live TTFT p99 | SLO met | Live errors | Batch req/s | Batch failed |
+|---|---|---|---|---|---|---|
+| Steady, 80 req/s, 10 min | sql | 373 ms | 99.97% | 1 | 45.4 | 0 |
+| | redis | 373 ms | 99.97% | 0 | 45.5 | 0 |
+| Near capacity, 110 req/s, 5 min | sql | 338 ms | 99.94% | 2 | 18.6 | 0 |
+| | redis | 339 ms | 99.99% | 0 | 19.6 | 0 |
+| Surge, 80 + 40 req/s for 120 s | sql | 361 ms | 99.98% | 1 | 35.1 | 0 |
+| | redis | 363 ms | 99.98% | 0 | 35.6 | 0 |
+| Every failure, 10 min | sql | 8,604 ms | 94.94% | 132 | - | 0 |
+| | redis | 370 ms | 99.69% | 134 | - | 0 |
+
+Batch at these rates is far below the redis transport's ~2.8k req/s cap, so steady state, near
+capacity and surge are the same on both. The every-failure runs differ only at the primary EPP
+failback (+253 s): in the sql run the restarted primary, starting without the standby's
+in-flight state, pushed engines to 897 running plus 564 waiting (normal: ~730 and 0), so live
+TTFT p99 reached 11.6 s for ~40 s and 2,242 live requests missed the SLO; in the redis run the
+same failback peaked at 750 running and 0 waiting. One run each cannot separate transport from
+the timing of the failback. Live errors match across transports: engine kills 76-82 (engines
+abort in-flight work on SIGTERM), primary EPP kill 49-58 503s, up from 19 in `slo-ALL`.

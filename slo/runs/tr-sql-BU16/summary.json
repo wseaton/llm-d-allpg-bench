@@ -1,0 +1,73 @@
+{
+  "live_requests": 38114,
+  "live_errors": 1,
+  "live_rps": 77.9,
+  "ttft_p50_ms": 238,
+  "ttft_p90_ms": 282,
+  "ttft_p99_ms": 361,
+  "itl_p50_ms": 52.2,
+  "itl_p99_ms": 95.4,
+  "e2e_p50_ms": 6889,
+  "e2e_p99_ms": 7653,
+  "slo_attainment": 0.9998,
+  "window_s": 489,
+  "ttft_p99_by_20s": {
+    "0s": 341,
+    "20s": 364,
+    "40s": 379,
+    "60s": 400,
+    "80s": 384,
+    "100s": 376,
+    "120s": 389,
+    "140s": 379,
+    "160s": 381,
+    "180s": 306,
+    "200s": 328,
+    "220s": 312,
+    "240s": 308,
+    "260s": 321,
+    "280s": 307,
+    "300s": 357,
+    "320s": 379,
+    "340s": 361,
+    "360s": 362,
+    "380s": 370,
+    "400s": 378,
+    "420s": 364,
+    "440s": 356,
+    "460s": 365
+  },
+  "epp_requests": {
+    "p-10/Dispatched": 17188,
+    "p100/Dispatched": 42988
+  },
+  "epp_queue_after": {
+    "-10": 117
+  },
+  "dispatcher_deltas": {},
+  "samples": {
+    "engine_running": {
+      "mean": 829.25,
+      "max": 919.0
+    },
+    "engine_waiting": {
+      "mean": 2.34,
+      "max": 31.0
+    },
+    "epp_queue_p-10": {
+      "mean": 121.74,
+      "max": 128.0
+    },
+    "epp_queue_p100": {
+      "mean": 0.0,
+      "max": 1.0
+    },
+    "saturation": {
+      "mean": 0.81,
+      "max": 0.8955078125
+    }
+  },
+  "batch_done": 22483,
+  "batch_total": 30000,
+  "batch_failed": 0
+}

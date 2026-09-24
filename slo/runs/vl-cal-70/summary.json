@@ -1,0 +1,48 @@
+{
+  "live_requests": 12314,
+  "live_errors": 0,
+  "live_rps": 67.3,
+  "ttft_p50_ms": 206,
+  "ttft_p90_ms": 468,
+  "ttft_p99_ms": 788,
+  "itl_p50_ms": 19.7,
+  "itl_p99_ms": 101.2,
+  "e2e_p50_ms": 3024,
+  "e2e_p99_ms": 3915,
+  "slo_attainment": 0.9212,
+  "window_s": 183,
+  "ttft_p99_by_20s": {
+    "0s": 955,
+    "20s": 836,
+    "40s": 740,
+    "60s": 706,
+    "80s": 953,
+    "100s": 741,
+    "120s": 672,
+    "140s": 633,
+    "160s": 670
+  },
+  "epp_requests": {
+    "p100/Dispatched": 12314
+  },
+  "epp_queue_after": {},
+  "dispatcher_deltas": {},
+  "samples": {
+    "engine_running": {
+      "mean": 192.68,
+      "max": 279.0
+    },
+    "engine_waiting": {
+      "mean": 0.0,
+      "max": 0.0
+    },
+    "epp_queue_p100": {
+      "mean": 0.0,
+      "max": 0.0
+    },
+    "saturation": {
+      "mean": 0.1,
+      "max": 0.1376953125
+    }
+  }
+}

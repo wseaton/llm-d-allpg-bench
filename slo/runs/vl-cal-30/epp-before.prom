@@ -1,0 +1,2 @@
+llm_d_epp_flow_control_pool_saturation{inference_pool="slo",stage="decode"} 0
+llm_d_epp_flow_control_pool_saturation{inference_pool="slo",stage="effective"} 0

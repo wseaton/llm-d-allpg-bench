@@ -1,5 +1,6 @@
-## router-holdback-0.8 for the Qwen3-32B pool (vllm/vllm.yaml). maxConcurrency is a
-## calibration placeholder until the live-only sweep sets it.
+## router-holdback-0.8 for the Qwen3-32B pool (vllm/vllm.yaml). maxConcurrency 22: the live-only
+## sweep (program-vllm-cal.sh) crosses the 500 ms TTFT p99 SLO at ~18 running requests per engine,
+## and 18 / 0.8 puts the batch holdback ceiling there.
 router:
   extraServicePorts:
     - name: http
@@ -30,7 +31,7 @@ router:
             maxCeiling: 1.0
         - type: concurrency-detector
           parameters:
-            maxConcurrency: 256
+            maxConcurrency: 22
             concurrencyMode: requests
             headroom: 0.0
         schedulingProfiles:

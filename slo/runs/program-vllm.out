@@ -1,0 +1,577 @@
+transport: sql (transport: "sql)
+{
+  "live_requests": 23529,
+  "live_errors": 0,
+  "live_rps": 38.9,
+  "ttft_p50_ms": 138,
+  "ttft_p90_ms": 413,
+  "ttft_p99_ms": 886,
+  "itl_p50_ms": 19.4,
+  "itl_p99_ms": 77.7,
+  "e2e_p50_ms": 2903,
+  "e2e_p99_ms": 3542,
+  "slo_attainment": 0.9322,
+  "window_s": 605,
+  "ttft_p99_by_20s": {
+    "0s": 1419,
+    "20s": 774,
+    "40s": 746,
+    "60s": 911,
+    "80s": 801,
+    "100s": 786,
+    "120s": 943,
+    "140s": 699,
+    "160s": 803,
+    "180s": 889,
+    "200s": 677,
+    "220s": 713,
+    "240s": 742,
+    "260s": 867,
+    "280s": 803,
+    "300s": 844,
+    "320s": 884,
+    "340s": 693,
+    "360s": 951,
+    "380s": 921,
+    "400s": 754,
+    "420s": 818,
+    "440s": 948,
+    "460s": 956,
+    "480s": 746,
+    "500s": 846,
+    "520s": 731,
+    "540s": 853,
+    "560s": 718,
+    "580s": 819
+  },
+  "epp_requests": {
+    "p-10/Dispatched": 6868,
+    "p100/Dispatched": 23529
+  },
+  "epp_queue_after": {
+    "-10": 64
+  },
+  "dispatcher_deltas": {
+    "llm_d_async_async_dispatched_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 6901.0,
+    "llm_d_async_async_gate_decisions_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\",reason=\"gate_closed\"}": 323801.0,
+    "llm_d_async_async_request_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 6901.0,
+    "llm_d_async_async_successful_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 6903.0,
+    "llm_d_async_async_tokens_total{direction=\"input\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 4331084.0,
+    "llm_d_async_async_tokens_total{direction=\"output\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 883584.0
+  },
+  "samples": {
+    "engine_running": {
+      "mean": 145.09,
+      "max": 176.0
+    },
+    "engine_waiting": {
+      "mean": 0.08,
+      "max": 15.0
+    },
+    "epp_queue_p-10": {
+      "mean": 62.35,
+      "max": 64.0
+    },
+    "epp_queue_p100": {
+      "mean": 0.07,
+      "max": 20.0
+    },
+    "saturation": {
+      "mean": 0.85,
+      "max": 1.0
+    }
+  },
+  "batch_done": 8388,
+  "batch_total": 12000,
+  "batch_failed": 0
+}
+transport: redis (transport: "redis-sortedset)
+{
+  "live_requests": 23624,
+  "live_errors": 1,
+  "live_rps": 39.0,
+  "ttft_p50_ms": 138,
+  "ttft_p90_ms": 392,
+  "ttft_p99_ms": 842,
+  "itl_p50_ms": 19.4,
+  "itl_p99_ms": 77.7,
+  "e2e_p50_ms": 2897,
+  "e2e_p99_ms": 3563,
+  "slo_attainment": 0.9424,
+  "window_s": 605,
+  "ttft_p99_by_20s": {
+    "0s": 948,
+    "20s": 751,
+    "40s": 891,
+    "60s": 847,
+    "80s": 809,
+    "100s": 898,
+    "120s": 802,
+    "140s": 939,
+    "160s": 704,
+    "180s": 805,
+    "200s": 737,
+    "220s": 775,
+    "240s": 706,
+    "260s": 786,
+    "280s": 718,
+    "300s": 1042,
+    "320s": 862,
+    "340s": 936,
+    "360s": 774,
+    "380s": 836,
+    "400s": 851,
+    "420s": 800,
+    "440s": 703,
+    "460s": 980,
+    "480s": 724,
+    "500s": 814,
+    "520s": 830,
+    "540s": 676,
+    "560s": 735,
+    "580s": 775
+  },
+  "epp_requests": {
+    "p-10/Dispatched": 6868,
+    "p100/Dispatched": 23624
+  },
+  "epp_queue_after": {
+    "-10": 58
+  },
+  "dispatcher_deltas": {
+    "llm_d_async_async_dispatched_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 6868.0,
+    "llm_d_async_async_gate_decisions_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\",reason=\"gate_closed\"}": 314028.0,
+    "llm_d_async_async_request_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 6868.0,
+    "llm_d_async_async_successful_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 6854.0,
+    "llm_d_async_async_tokens_total{direction=\"input\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 4299988.0,
+    "llm_d_async_async_tokens_total{direction=\"output\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 877312.0
+  },
+  "samples": {
+    "engine_running": {
+      "mean": 146.02,
+      "max": 176.0
+    },
+    "engine_waiting": {
+      "mean": 0.07,
+      "max": 6.0
+    },
+    "epp_queue_p-10": {
+      "mean": 62.29,
+      "max": 64.0
+    },
+    "epp_queue_p100": {
+      "mean": 0.06,
+      "max": 5.0
+    },
+    "saturation": {
+      "mean": 0.86,
+      "max": 1.0
+    }
+  },
+  "batch_done": 8334,
+  "batch_total": 12000,
+  "batch_failed": 0
+}
+transport: sql (transport: "sql)
+{
+  "live_requests": 14494,
+  "live_errors": 0,
+  "live_rps": 47.7,
+  "ttft_p50_ms": 159,
+  "ttft_p90_ms": 373,
+  "ttft_p99_ms": 836,
+  "itl_p50_ms": 19.4,
+  "itl_p99_ms": 77.6,
+  "e2e_p50_ms": 2882,
+  "e2e_p99_ms": 3452,
+  "slo_attainment": 0.9478,
+  "window_s": 304,
+  "ttft_p99_by_20s": {
+    "0s": 1305,
+    "20s": 669,
+    "40s": 716,
+    "60s": 690,
+    "80s": 627,
+    "100s": 673,
+    "120s": 852,
+    "140s": 823,
+    "160s": 736,
+    "180s": 632,
+    "200s": 964,
+    "220s": 586,
+    "240s": 741,
+    "260s": 536,
+    "280s": 688
+  },
+  "epp_requests": {
+    "p-10/Dispatched": 1741,
+    "p100/Dispatched": 14494
+  },
+  "epp_queue_after": {
+    "-10": 63
+  },
+  "dispatcher_deltas": {
+    "llm_d_async_async_dispatched_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 1765.0,
+    "llm_d_async_async_gate_decisions_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\",reason=\"gate_closed\"}": 127509.0,
+    "llm_d_async_async_request_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 1765.0,
+    "llm_d_async_async_successful_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 1765.0,
+    "llm_d_async_async_tokens_total{direction=\"input\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 1107067.0,
+    "llm_d_async_async_tokens_total{direction=\"output\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 225920.0
+  },
+  "samples": {
+    "engine_running": {
+      "mean": 149.36,
+      "max": 176.0
+    },
+    "engine_waiting": {
+      "mean": 0.0,
+      "max": 0.0
+    },
+    "epp_queue_p-10": {
+      "mean": 63.07,
+      "max": 64.0
+    },
+    "epp_queue_p100": {
+      "mean": 0.51,
+      "max": 28.0
+    },
+    "saturation": {
+      "mean": 0.88,
+      "max": 1.0056818181818181
+    }
+  },
+  "batch_done": 3296,
+  "batch_total": 7998,
+  "batch_failed": 0
+}
+transport: redis (transport: "redis-sortedset)
+{
+  "live_requests": 14556,
+  "live_errors": 0,
+  "live_rps": 47.7,
+  "ttft_p50_ms": 148,
+  "ttft_p90_ms": 334,
+  "ttft_p99_ms": 708,
+  "itl_p50_ms": 19.4,
+  "itl_p99_ms": 77.7,
+  "e2e_p50_ms": 2868,
+  "e2e_p99_ms": 3342,
+  "slo_attainment": 0.9651,
+  "window_s": 305,
+  "ttft_p99_by_20s": {
+    "0s": 751,
+    "20s": 644,
+    "40s": 821,
+    "60s": 564,
+    "80s": 587,
+    "100s": 798,
+    "120s": 807,
+    "140s": 583,
+    "160s": 644,
+    "180s": 687,
+    "200s": 715,
+    "220s": 774,
+    "240s": 612,
+    "260s": 638,
+    "280s": 486
+  },
+  "epp_requests": {
+    "p-10/Dispatched": 1640,
+    "p100/Dispatched": 14556
+  },
+  "epp_queue_after": {
+    "-10": 39
+  },
+  "dispatcher_deltas": {
+    "llm_d_async_async_dispatched_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 1671.0,
+    "llm_d_async_async_gate_decisions_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\",reason=\"gate_closed\"}": 125744.0,
+    "llm_d_async_async_request_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 1671.0,
+    "llm_d_async_async_successful_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 1651.0,
+    "llm_d_async_async_tokens_total{direction=\"input\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 1035508.0,
+    "llm_d_async_async_tokens_total{direction=\"output\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 211328.0
+  },
+  "samples": {
+    "engine_running": {
+      "mean": 148.54,
+      "max": 176.0
+    },
+    "engine_waiting": {
+      "mean": 0.0,
+      "max": 0.0
+    },
+    "epp_queue_p-10": {
+      "mean": 63.38,
+      "max": 64.0
+    },
+    "epp_queue_p100": {
+      "mean": 0.13,
+      "max": 11.0
+    },
+    "saturation": {
+      "mean": 0.87,
+      "max": 1.0056818181818181
+    }
+  },
+  "batch_done": 3172,
+  "batch_total": 7998,
+  "batch_failed": 0
+}
+transport: sql (transport: "sql)
+{
+  "live_requests": 18854,
+  "live_errors": 0,
+  "live_rps": 39.0,
+  "ttft_p50_ms": 144,
+  "ttft_p90_ms": 376,
+  "ttft_p99_ms": 810,
+  "itl_p50_ms": 19.4,
+  "itl_p99_ms": 78.0,
+  "e2e_p50_ms": 2892,
+  "e2e_p99_ms": 3546,
+  "slo_attainment": 0.9466,
+  "window_s": 484,
+  "ttft_p99_by_20s": {
+    "0s": 1010,
+    "20s": 873,
+    "40s": 786,
+    "60s": 762,
+    "80s": 895,
+    "100s": 914,
+    "120s": 830,
+    "140s": 839,
+    "160s": 864,
+    "180s": 490,
+    "200s": 750,
+    "220s": 381,
+    "240s": 557,
+    "260s": 622,
+    "280s": 502,
+    "300s": 694,
+    "320s": 998,
+    "340s": 657,
+    "360s": 839,
+    "380s": 734,
+    "400s": 989,
+    "420s": 765,
+    "440s": 707,
+    "460s": 896
+  },
+  "epp_requests": {
+    "p-10/Dispatched": 4390,
+    "p-10/EvictedTTL": 35,
+    "p100/Dispatched": 20640
+  },
+  "epp_queue_after": {
+    "-10": 50
+  },
+  "dispatcher_deltas": {
+    "llm_d_async_async_dispatched_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 4424.0,
+    "llm_d_async_async_gate_decisions_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\",reason=\"gate_closed\"}": 219108.0,
+    "llm_d_async_async_request_retries_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 35.0,
+    "llm_d_async_async_request_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 4389.0,
+    "llm_d_async_async_shedded_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 35.0,
+    "llm_d_async_async_successful_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 4392.0,
+    "llm_d_async_async_tokens_total{direction=\"input\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 2755539.0,
+    "llm_d_async_async_tokens_total{direction=\"output\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 562176.0
+  },
+  "samples": {
+    "engine_running": {
+      "mean": 148.4,
+      "max": 176.0
+    },
+    "engine_waiting": {
+      "mean": 0.05,
+      "max": 4.0
+    },
+    "epp_queue_p-10": {
+      "mean": 62.45,
+      "max": 64.0
+    },
+    "epp_queue_p100": {
+      "mean": 0.3,
+      "max": 19.0
+    },
+    "saturation": {
+      "mean": 0.87,
+      "max": 1.0
+    }
+  },
+  "batch_done": 5890,
+  "batch_total": 9999,
+  "batch_failed": 0
+}
+transport: redis (transport: "redis-sortedset)
+{
+  "live_requests": 18815,
+  "live_errors": 0,
+  "live_rps": 38.9,
+  "ttft_p50_ms": 143,
+  "ttft_p90_ms": 381,
+  "ttft_p99_ms": 847,
+  "itl_p50_ms": 19.4,
+  "itl_p99_ms": 77.5,
+  "e2e_p50_ms": 2894,
+  "e2e_p99_ms": 3529,
+  "slo_attainment": 0.9437,
+  "window_s": 484,
+  "ttft_p99_by_20s": {
+    "0s": 956,
+    "20s": 695,
+    "40s": 1022,
+    "60s": 825,
+    "80s": 931,
+    "100s": 767,
+    "120s": 945,
+    "140s": 922,
+    "160s": 766,
+    "180s": 585,
+    "200s": 696,
+    "220s": 535,
+    "240s": 817,
+    "260s": 663,
+    "280s": 430,
+    "300s": 778,
+    "320s": 937,
+    "340s": 713,
+    "360s": 984,
+    "380s": 902,
+    "400s": 773,
+    "420s": 845,
+    "440s": 850,
+    "460s": 680
+  },
+  "epp_requests": {
+    "p-10/Dispatched": 4537,
+    "p100/Dispatched": 20556
+  },
+  "epp_queue_after": {
+    "-10": 61
+  },
+  "dispatcher_deltas": {
+    "llm_d_async_async_dispatched_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 4553.0,
+    "llm_d_async_async_gate_decisions_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\",reason=\"gate_closed\"}": 226205.0,
+    "llm_d_async_async_request_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 4553.0,
+    "llm_d_async_async_successful_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 4541.0,
+    "llm_d_async_async_tokens_total{direction=\"input\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 2848698.0,
+    "llm_d_async_async_tokens_total{direction=\"output\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 581248.0
+  },
+  "samples": {
+    "engine_running": {
+      "mean": 148.02,
+      "max": 176.0
+    },
+    "engine_waiting": {
+      "mean": 0.02,
+      "max": 2.0
+    },
+    "epp_queue_p-10": {
+      "mean": 62.43,
+      "max": 64.0
+    },
+    "epp_queue_p100": {
+      "mean": 0.39,
+      "max": 31.0
+    },
+    "saturation": {
+      "mean": 0.87,
+      "max": 1.0
+    }
+  },
+  "batch_done": 6042,
+  "batch_total": 9999,
+  "batch_failed": 0
+}
+transport: sql (transport: "sql)
+{
+  "live_requests": 23586,
+  "live_errors": 20,
+  "live_rps": 39.0,
+  "ttft_p50_ms": 130,
+  "ttft_p90_ms": 351,
+  "ttft_p99_ms": 784,
+  "itl_p50_ms": 19.4,
+  "itl_p99_ms": 76.2,
+  "e2e_p50_ms": 2876,
+  "e2e_p99_ms": 3559,
+  "slo_attainment": 0.9497,
+  "window_s": 605,
+  "ttft_p99_by_20s": {
+    "0s": 935,
+    "20s": 706,
+    "40s": 766,
+    "60s": 656,
+    "80s": 763,
+    "100s": 545,
+    "120s": 535,
+    "140s": 580,
+    "160s": 591,
+    "180s": 532,
+    "200s": 594,
+    "220s": 309,
+    "240s": 609,
+    "260s": 718,
+    "280s": 794,
+    "300s": 737,
+    "320s": 782,
+    "340s": 913,
+    "360s": 801,
+    "380s": 775,
+    "400s": 894,
+    "420s": 731,
+    "440s": 994,
+    "460s": 969,
+    "480s": 836,
+    "500s": 851,
+    "520s": 750,
+    "540s": 941,
+    "560s": 930,
+    "580s": 863
+  },
+  "epp_requests": {
+    "p-10/Dispatched": -35548,
+    "p100/Dispatched": -103622
+  },
+  "epp_queue_after": {
+    "-10": 64
+  },
+  "dispatcher_deltas": {
+    "llm_d_async_async_dispatched_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 189.0,
+    "llm_d_async_async_gate_decisions_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\",reason=\"gate_closed\"}": 50518.0,
+    "llm_d_async_async_request_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 189.0,
+    "llm_d_async_async_successful_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 182.0,
+    "llm_d_async_async_tokens_total{direction=\"input\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 113783.0,
+    "llm_d_async_async_tokens_total{direction=\"output\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 23296.0
+  },
+  "samples": {
+    "engine_running": {
+      "mean": 113.78,
+      "max": 170.0
+    },
+    "engine_waiting": {
+      "mean": 0.03,
+      "max": 4.0
+    },
+    "epp_queue_p-10": {
+      "mean": 56.18,
+      "max": 64.0
+    },
+    "epp_queue_p100": {
+      "mean": 0.22,
+      "max": 14.0
+    },
+    "saturation": {
+      "mean": 0.82,
+      "max": 1.0
+    }
+  },
+  "batch_done": 7052,
+  "batch_total": 12000,
+  "batch_failed": 0,
+  "chaos": [
+    "+90s delete 2 engines",
+    "+210s delete primary epp",
+    "+330s delete oldest proxy",
+    "+450s delete dispatcher"
+  ]
+}
+transport: redis (transport: "redis-sortedset)

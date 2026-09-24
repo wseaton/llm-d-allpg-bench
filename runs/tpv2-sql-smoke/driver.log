@@ -1,0 +1,7 @@
+submitting 1 batches x 2000 = 2000 requests
+generated 988890 bytes in 0.0s
+submitted batch=batch_6eabe1d8-7c6c-4d5e-b5c8-4a4123005d6b idx=0 bytes=988890
+all batches submitted in 0.0s ids=1
+SAMPLE t=0.0 done=0/2000 rate=0.0 terminal=0 failed=0
+SAMPLE t=2.0 done=2000/2000 rate=998.7 terminal=1 failed=0
+RESULT steady_state_median_rps=998.7 steady_state_mean_rps=998.7 peak_rps=998.7 total_done=2000 elapsed=2.0 submit_elapsed=0.0 drain_rps=997.3 e2e_rps=975.3 failed=0

@@ -1,0 +1,6 @@
+vcr: throughput, 4 replicas on g80d16c
+transport: sql (transport: "sql)
+tp-sql-r1: RESULT steady_state_median_rps=19921.0 steady_state_mean_rps=11624.9 peak_rps=29900.7 total_done=200000 elapsed=20.1 submit_elapsed=0.2 drain_rps=9958.6 e2e_rps=9842.1 failed=0
+transport: redis (transport: "redis-sortedset)
+tp-redis-r1: RESULT steady_state_median_rps=0.0 steady_state_mean_rps=2566.4 peak_rps=21208.7 total_done=200000 elapsed=82.3 submit_elapsed=0.2 drain_rps=2430.2 e2e_rps=2423.3 failed=0
+transport: sql (transport: "sql)

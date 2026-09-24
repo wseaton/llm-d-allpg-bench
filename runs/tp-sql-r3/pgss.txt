@@ -1,0 +1,15 @@
+10644 ms | 3129 calls | 3.40 ms/call | WITH input AS ( SELECT * FROM unnest($2::text[], $3::text[], $4::bigint[], $5::text[], $6::text[], $7::bigint[
+4921 ms | 4618 calls | 1.07 ms/call | SELECT id, request_token, queue, partition_id, dispatch_epoch, dispatch_attempt, deadline, envelope, payload, 
+3332 ms | 790 calls | 4.22 ms/call | INSERT INTO async_requests (id, request_token, queue, partition_id, deadline, envelope, payload, created_at) S
+1316 ms | 1782 calls | 0.74 ms/call | SELECT r.id, r.request_token FROM async_requests r JOIN unnest($1::text[], $2::text[]) AS k(id, request_token)
+1005 ms | 825 calls | 1.22 ms/call | SELECT seq, route, id, request_token, payload FROM async_pop_results($1, $2)
+34 ms | 3 calls | 11.33 ms/call | WITH stale AS MATERIALIZED ( SELECT r.ctid FROM async_requests r JOIN async_partitions p ON p.queue = r.queue 
+13 ms | 825 calls | 0.02 ms/call | DELETE FROM async_results WHERE route = $1 AND expires_at > 0 AND expires_at < $2
+11 ms | 2 calls | 5.43 ms/call | SELECT COUNT(*), COUNT(*) FILTER (WHERE deadline <= $2), COUNT(*) FILTER (WHERE deadline <= $3), COUNT(*) FILT
+6 ms | 72 calls | 0.08 ms/call | UPDATE batch_items SET status = jsonb_set(COALESCE(status, '{}'::jsonb), '{request_counts}', $1::jsonb, true) 
+5 ms | 14 calls | 0.38 ms/call | SELECT extract($1 from now())::int, $2, coalesce(max(age(backend_xmin)),$3), coalesce(max(extract($4 from now(
+2 ms | 90 calls | 0.02 ms/call | SELECT id, tenant_id, expiry, tags, processor_id, priority, epoch, recovery_attempts, status, spec FROM batch_
+2 ms | 20 calls | 0.08 ms/call | INSERT INTO file_items (id, tenant_id, expiry, tags, purpose, spec, status) VALUES ($1, $2, $3, $4, $5, $6, $7
+2 ms | 30 calls | 0.05 ms/call | UPDATE batch_items SET status = $1 WHERE id = $2 AND epoch = $3
+1 ms | 3919 calls | 0.00 ms/call | commit
+1 ms | 31 calls | 0.03 ms/call | WITH claimed AS ( SELECT id FROM batch_items WHERE processor_id IS NULL AND status IS NOT NULL AND status::jso

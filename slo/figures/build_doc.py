@@ -75,7 +75,9 @@ sections.append(f"""
 <li>Live traffic keeps its SLO next to batch only with llm-d router {FLOWCONTROL}, {OBJECTIVE} priorities and the {HOLDBACK} usage limit. Priority ordering alone, or a dispatcher-side gate alone, does not hold it.</li>
 <li>At 94% of pool capacity on 16 engines, 99.97-99.99% of live requests meet a 500 ms TTFT SLO across three 10-minute trials (p99 362-370 ms), near capacity and through a 50% live surge.</li>
 <li>With engines, the primary EPP, a proxy and the dispatcher killed in one run, batch loses nothing and 97.95% of live requests meet the SLO.</li>
-<li>Fixes: {PR452} (pushed) and {PR3029} (draft while its proxy drain is reworked; see fix 20). Accepted limitation: a restarted primary EPP causes ~20 s of live requests over the SLO.</li>
+<li>Fixes: {PR452} (pushed) and {PR3029} (draft; the proxy drain was reworked and verified, see fix 20). Accepted limitation: a restarted primary EPP causes ~20 s of live requests over the SLO.</li>
+<li>Transport: with the gateway control plane on Postgres either way, llm-d-async's sql transport moves 11-12k batch requests/s end to end against ~2.7k for redis-sortedset, whose dispatch loop handles one request at a time. At SLO-run batch rates the two are indistinguishable.</li>
+<li>Real vLLM (Qwen3-32B, 8 x H200): live-only SLO knee ~55 req/s. Graceful shutdown works: engine kills under load lost 0 live requests (82 on vcr). With batch, the calibrated holdback does not yet hold the SLO (93-96%); recalibration is open.</li>
 </ul>
 
 <h2>Setup</h2>
@@ -156,6 +158,45 @@ sections.append(f"""
 """)
 
 sections.append(f"""
+<h2>Transport A/B: sql vs redis-sortedset</h2>
+<p>Gateway control plane on Postgres ({GW676}) in both cases; only llm-d-async dispatch moves. Redis 7.4 with the same 8 cores as Postgres, appendonly off, 8 io-threads. Same images for both: gateway {GW_BRANCH} (rebased onto the current #676 head), dispatcher {PR452}, poll 5 ms, batch 256. Before the comparison the gateway's redis path got the batching the sql path already had (fixes 21-23: batched result reads, one MULTI/EXEC per submit batch, submit batching on every transport).</p>
+{img(F("10-transport.png"), f"Figure 10. 200k requests, 4 zero-latency vcr engines, reps alternating transports. Data: {link(KIT_URL + '/tree/main/runs', 'runs/tp-*')}.")}
+<ul>
+<li>redis-sortedset holds flat at ~2.7-2.8k req/s with Redis nearly idle (~4 s of server time in a 74 s run) and no pod CPU-bound. The dispatcher's <code>requestWorker</code> handles each peeked request serially (cancellation check, claim, hand-off): 3-4 round trips per request on one goroutine per queue. The sql transport batches claims and cancellation checks per poll. Batching them on redis is the fix.</li>
+<li>At the SLO runs' batch rates (19-45 req/s) the transport does not matter:</li>
+</ul>
+{table(["Scenario (16 vcr engines)", "sql p99 / SLO met", "redis p99 / SLO met", "Batch failed"], [
+    ["Steady 80 req/s, 10 min", "373 ms / 99.97%", "373 ms / 99.97%", "0 / 0"],
+    ["Near capacity 110 req/s", "338 ms / 99.94%", "339 ms / 99.99%", "0 / 0"],
+    ["Surge 80 + 40 req/s", "361 ms / 99.98%", "363 ms / 99.98%", "0 / 0"],
+    ["Every failure at once", "8.6 s / 94.94%", "370 ms / 99.69%", "0 / 0"],
+])}
+<p>The every-failure difference is the EPP failback, not the transport: in the sql run the restarted primary pushed engines to 897 running plus 564 waiting (normal ~730 and 0) for ~40 s; the same failback in the redis run peaked at 750 and 0. One run each. Data: {runs("tr-sql-S16", "tr-redis-S16", "tr-sql-ALL", "tr-redis-ALL")}.</p>
+""")
+
+sections.append(f"""
+<h2>Real vLLM: Qwen3-32B on 8 x H200</h2>
+<p>vLLM v0.30.0, TP1, one H200 per engine, <code>--shutdown-timeout=60</code> with a 90 s grace period, 256-token prompts and 128 output tokens, through the same router. The concurrency detector's <code>maxConcurrency</code> has to be measured on real engines: the pool crosses the 500 ms p99 SLO near 55 req/s, at ~18 running requests per engine, so it is set to 22 (18 / 0.8, the holdback ceiling).</p>
+{img(F("11-vllm-calibration.png"), f"Figure 11. Live-only sweep. No engine queued a request at any rate; the knee is latency, not KV capacity (~530 concurrent requests of this shape fit per engine). Data: {runs('vl-cal-50', 'vl-cal-60')}.")}
+{table(["Scenario (live + batch)", "sql p99 / SLO met", "redis p99 / SLO met", "Batch req/s", "Batch failed"], [
+    ["Steady 40 req/s, 10 min", "886 ms / 93.2%", "842 ms / 94.2%", "11.4", "0"],
+    ["Near capacity 50 req/s", "836 ms / 94.8%", "708 ms / 96.5%", "5.5", "0"],
+    ["Surge 40 + 15 req/s", "810 ms / 94.7%", "847 ms / 94.4%", "9.2", "0"],
+    ["Every failure at once (sql)", "784 ms / 95.0%", "-", "-", "0"],
+])}
+<ul>
+<li><b>Graceful shutdown works.</b> Killing two engines under load lost 0 live requests; vcr, which aborts in-flight work on SIGTERM, lost 82 in the same scenario. The run's 20 errors are all 503s at the primary EPP kill.</li>
+<li><b>The SLO does not hold with batch yet.</b> Saturation averages 0.85-0.88 and reaches 1.0, above the 0.8 ceiling: holdback stops new batch dispatch past the ceiling, but batch requests already running keep their slots, and at 1.0 the EPP queues live traffic. A ceiling calibrated live-only leaves too little headroom once batch is mixed in; the next step is a sweep with batch present (lower ceiling or <code>maxConcurrency</code>).</li>
+</ul>
+<p>Data: {runs("vl-sql-S", "vl-redis-S", "vl-sql-NC", "vl-sql-ALL")}.</p>
+""")
+
+sections.append(f"""
+<h2>Metric gates on llm-d-router</h2>
+<p>llm-d-async's <code>prometheus-budget</code> gate (v0.10.0) queries <code>inference_extension_flow_control_queue_size</code>, <code>inference_pool_per_pod_queue_size</code> and <code>inference_pool_ready_pods</code>. The llm-d-router EPP exports these only as <code>llm_d_epp_flow_control_queue_size</code>, <code>llm_d_epp_per_endpoint_queue_size</code> and <code>llm_d_epp_ready_endpoints</code>, with no deprecated twins. Every tier of the cascade returns nothing and the gate serves its fallback (default 0, closed). Its per-pod queue tier also counts waiting requests, which stay near 0 below the knee, and the gate admits every request while a cached reading is open, the overshoot counted admission removed. The runs above use <code>endpoint-scrape</code> with <code>admission: counted</code> ({PR452}), which reads the EPP's own metrics directly.</p>
+""")
+
+sections.append(f"""
 <h2>Quota gate correctness</h2>
 <p>{PR452} adds a Postgres-backed <code>sql-quota</code> gate with exact global limits (concurrency slots per heartbeated holder, sliding-log rate limits). {VEIL} (Lean 4) models in {FORMAL} found three bugs before load testing:</p>
 {img(QUOTA_DIAGRAM, "Figure 9. A release retried after a lost reply subtracts twice: three requests run under a limit of two.", width=560)}
@@ -218,19 +259,21 @@ sections.append(f"""
 {table(["Change", "Where", "State"], [
     ["sql transport, sql-quota, pool fix, estimate-proof plans, idle-pool fix", PR452, "open"],
     ["endpoint-scrape absent_value, transport-error retries, counted admission", PR452, "open"],
-    ["EPP drain-aware health checks, proxy drain", PR3029, "draft (drain reworked)"],
+    ["EPP drain-aware health checks, proxy drain", PR3029, "draft (drain reworked, verified)"],
     ["Postgres control plane, schema migrations", f"{GW676}, {GW677}", "open (not ours)"],
-    ["Migration 0002 adopts a #676-created batch_events; custom_id kept on async errors; batched result reads", "local gateway integration branch", "local"],
+    ["Migration 0002 adopts a #676-created batch_events; custom_id kept on async errors; batched result reads; redis batch reads and submits", GW_BRANCH, "pushed (rebased onto #676 ed06d5f)"],
     ["nyann-bench: headers option, per-stage rates, configurable error abort", "wseaton/nyann-bench branches", "pushed"],
 ])}
 """)
 
-sections.append("""
+sections.append(f"""
 <h2>Before production</h2>
 <ul>
 <li>Merge the two PRs.</li>
 <li>priority-holdback is alpha and needs <code>--allow-experimental-plugins</code>.</li>
 <li>Accepted limitation: a restarted primary EPP takes traffic back without the standby's in-flight state (the router has no cross-replica syncer beyond the no-op {LOCAL_SYNCER}), costing ~20 s of live TTFT above SLO once per primary restart. Adding engine utilization to the saturation signal did not help and cost steady-state SLO (98.2%).</li>
+<li>Recalibrate holdback on real vLLM with batch present; the live-only calibration does not hold the SLO once batch runs.</li>
+<li>llm-d-async: batch the redis-sortedset dispatch loop, and fix <code>prometheus-budget</code>'s metric names for llm-d-router.</li>
 <li>Engine deployments need a shutdown timeout: vLLM (and vcr) abort in-flight work on SIGTERM by default (<code>--shutdown-timeout</code>, {VLLM_SHUTDOWN}), so scaling engines down drops what runs on them.</li>
 </ul>
 
@@ -250,6 +293,10 @@ sections.append(f"""
 <li>Postgres: {PG_CLASS}, {PG_ESTIMATE}, {AUTO_EXPLAIN}. Formal methods: {VEIL}.</li>
 </ul>
 """)
+
+leftover = re.findall(r"\{[A-Z][A-Z0-9_]*\}", "".join(sections))
+if leftover:
+    raise SystemExit(f"unfilled placeholders: {sorted(set(leftover))}")
 
 html = "<html><head><meta charset='utf-8'></head><body>" + "".join(sections) + "</body></html>"
 (HERE / "writeup.html").write_text(html)

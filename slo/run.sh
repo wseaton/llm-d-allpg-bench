@@ -13,7 +13,8 @@
 # nyann-bench sends live traffic under the live objective from the slo-runner pod. Records
 # land in runs/NAME: nyann per-request JSONL, EPP and dispatcher metrics before and after
 # the live window, and the batch driver log. Leftover batches are cancelled afterwards and
-# the request queue is drained before returning.
+# the request queue (Postgres or Redis) is drained before returning. DISPATCHER_BASE picks
+# the dispatcher base values (default ../dispatcher-values.yaml, the sql transport).
 set -euo pipefail
 D="$(cd "$(dirname "$0")" && pwd)"
 NAME=$1 SCENARIO=$2 LIVE_RATE=${3:-16} LIVE_SECONDS=${4:-180} BATCH_REQUESTS=${5:-6000}
@@ -35,7 +36,7 @@ snapshot() {
 if [ "$SCENARIO" != live-only ]; then
   helm --kube-context "${KUBE_CONTEXT:-coreweave-waldorf}" -n allpg-bench upgrade dispatcher \
     "${ASYNC_CHART:?set ASYNC_CHART to charts/llm-d-async in a checkout of wseaton/llm-d-async}" \
-    -f "$D/../dispatcher-values.yaml" -f "$D/dispatcher-$SCENARIO.values.yaml" --wait --timeout 4m >/dev/null
+    -f "${DISPATCHER_BASE:-$D/../dispatcher-values.yaml}" -f "$D/dispatcher-$SCENARIO.values.yaml" --wait --timeout 4m >/dev/null
   k rollout status deploy/dispatcher-llm-d-async --timeout=180s >/dev/null
   k delete job "$JOB" --ignore-not-found --wait=true >/dev/null
   sed -e "s/DRIVER_NAME/$JOB/; s/NUM_BATCHES_VAL/3/; s/BATCH_SIZE_VAL/$((BATCH_REQUESTS / 3))/; s/PROMPT_TOKENS_VAL/256/; s/MAX_TOKENS_VAL/128/" \
@@ -68,7 +69,8 @@ if [ "$SCENARIO" != live-only ]; then
   done
   k delete job "$JOB" --ignore-not-found --wait=false >/dev/null
   for _ in $(seq 120); do
-    [ "$(psqlq 'SELECT count(*) FROM async_requests')" = 0 ] && break
+    [ "$(psqlq 'SELECT count(*) FROM async_requests')" = 0 ] &&
+      [ "$(k exec bench-redis -- redis-cli zcard llm-d-async:requests:sim-pool)" = 0 ] && break
     sleep 5
   done
 fi

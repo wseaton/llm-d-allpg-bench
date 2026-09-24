@@ -1,0 +1,6 @@
+llm_d_epp_flow_control_pool_saturation{inference_pool="slo",stage="decode"} 0.7998046875
+llm_d_epp_flow_control_pool_saturation{inference_pool="slo",stage="effective"} 0.7998046875
+llm_d_epp_flow_control_queue_size{fairness_id="default-flow",inference_pool="slo",model_name="sim-model",priority="-10",target_model_name="sim-model"} 86
+llm_d_epp_flow_control_queue_size{fairness_id="default-flow",inference_pool="slo",model_name="sim-model",priority="100",target_model_name="sim-model"} 0
+llm_d_epp_flow_control_requests_total{inference_pool="slo",outcome="Dispatched",priority="-10"} 154626
+llm_d_epp_flow_control_requests_total{inference_pool="slo",outcome="Dispatched",priority="100"} 207475

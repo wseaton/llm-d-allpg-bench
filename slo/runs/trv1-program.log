@@ -1,0 +1,2 @@
+tr-sql-S16 {"live_rps": 77.8, "live_errors": 0, "ttft_p50_ms": 238, "ttft_p99_ms": 371, "slo_attainment": 0.9997, "batch_done": 31329, "batch_failed": 0, "chaos": null} batch_rps 44.9 ttl_evicted 0 worst20s 397 sat {'mean': 0.81, 'max': 0.857421875}
+tr-redis-S16 {"live_rps": 77.6, "live_errors": 1, "ttft_p50_ms": 238, "ttft_p99_ms": 370, "slo_attainment": 0.9997, "batch_done": 31445, "batch_failed": 0, "chaos": null} batch_rps 45.3 ttl_evicted 0 worst20s 415 sat {'mean': 0.81, 'max': 0.8623046875}

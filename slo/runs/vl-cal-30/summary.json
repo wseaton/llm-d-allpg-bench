@@ -1,0 +1,48 @@
+{
+  "live_requests": 5410,
+  "live_errors": 0,
+  "live_rps": 29.6,
+  "ttft_p50_ms": 92,
+  "ttft_p90_ms": 151,
+  "ttft_p99_ms": 218,
+  "itl_p50_ms": 18.8,
+  "itl_p99_ms": 49.4,
+  "e2e_p50_ms": 2570,
+  "e2e_p99_ms": 2711,
+  "slo_attainment": 1.0,
+  "window_s": 183,
+  "ttft_p99_by_20s": {
+    "0s": 218,
+    "20s": 195,
+    "40s": 224,
+    "60s": 226,
+    "80s": 217,
+    "100s": 205,
+    "120s": 222,
+    "140s": 214,
+    "160s": 239
+  },
+  "epp_requests": {
+    "p100/Dispatched": 5410
+  },
+  "epp_queue_after": {},
+  "dispatcher_deltas": {},
+  "samples": {
+    "engine_running": {
+      "mean": 74.17,
+      "max": 93.0
+    },
+    "engine_waiting": {
+      "mean": 0.0,
+      "max": 0.0
+    },
+    "epp_queue_p100": {
+      "mean": 0.01,
+      "max": 1.0
+    },
+    "saturation": {
+      "mean": 0.04,
+      "max": 0.04541015625
+    }
+  }
+}

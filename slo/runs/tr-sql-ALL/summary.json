@@ -1,0 +1,92 @@
+{
+  "live_requests": 47287,
+  "live_errors": 132,
+  "live_rps": 77.8,
+  "ttft_p50_ms": 237,
+  "ttft_p90_ms": 303,
+  "ttft_p99_ms": 8604,
+  "itl_p50_ms": 51.9,
+  "itl_p99_ms": 92.0,
+  "e2e_p50_ms": 6859,
+  "e2e_p99_ms": 16253,
+  "slo_attainment": 0.9494,
+  "window_s": 608,
+  "ttft_p99_by_20s": {
+    "0s": 406,
+    "20s": 357,
+    "40s": 358,
+    "60s": 393,
+    "80s": 384,
+    "100s": 379,
+    "120s": 336,
+    "140s": 361,
+    "160s": 366,
+    "180s": 372,
+    "200s": 391,
+    "220s": 196,
+    "240s": 10901,
+    "260s": 11575,
+    "280s": 3455,
+    "300s": 345,
+    "320s": 385,
+    "340s": 412,
+    "360s": 370,
+    "380s": 359,
+    "400s": 370,
+    "420s": 401,
+    "440s": 372,
+    "460s": 392,
+    "480s": 365,
+    "500s": 358,
+    "520s": 362,
+    "540s": 368,
+    "560s": 378,
+    "580s": 369
+  },
+  "epp_requests": {
+    "p-10/Dispatched": -222488,
+    "p100/Dispatched": -331138
+  },
+  "epp_queue_after": {
+    "-10": 104
+  },
+  "dispatcher_deltas": {
+    "llm_d_async_async_dispatched_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 2549.0,
+    "llm_d_async_async_gate_decisions_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\",reason=\"gate_closed\"}": 85749.0,
+    "llm_d_async_async_request_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 2549.0,
+    "llm_d_async_async_successful_requests_total{pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 2530.0,
+    "llm_d_async_async_tokens_total{direction=\"input\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 1640671.0,
+    "llm_d_async_async_tokens_total{direction=\"output\",pool_name=\"default\",queue_id=\"llm-d-async:requests:sim-pool\",queue_name=\"llm-d-async:requests:sim-pool\"}": 323840.0
+  },
+  "samples": {
+    "engine_running": {
+      "mean": 722.16,
+      "max": 934.0
+    },
+    "engine_waiting": {
+      "mean": 23.25,
+      "max": 727.0
+    },
+    "epp_queue_p-10": {
+      "mean": 110.94,
+      "max": 131.0
+    },
+    "epp_queue_p100": {
+      "mean": 7.54,
+      "max": 296.0
+    },
+    "saturation": {
+      "mean": 0.76,
+      "max": 1.0
+    }
+  },
+  "batch_done": 22592,
+  "batch_total": 36000,
+  "batch_failed": 0,
+  "chaos": [
+    "+90s delete 2 engines",
+    "+210s delete primary epp",
+    "+330s delete oldest proxy",
+    "+450s delete dispatcher"
+  ]
+}

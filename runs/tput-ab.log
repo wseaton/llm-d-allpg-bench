@@ -1,0 +1,14 @@
+vcr: throughput, 4 replicas on g80d16c
+transport: sql (transport: "sql)
+tp-sql-r1: RESULT steady_state_median_rps=15367.5 steady_state_mean_rps=13515.2 peak_rps=19791.6 total_done=200000 elapsed=18.1 submit_elapsed=0.2 drain_rps=11065.1 e2e_rps=10916.3 failed=0
+transport: redis (transport: "redis-sortedset)
+tp-redis-r1: RESULT steady_state_median_rps=2821.2 steady_state_mean_rps=2829.5 peak_rps=3504.9 total_done=200000 elapsed=74.3 submit_elapsed=0.2 drain_rps=2693.1 e2e_rps=2685.1 failed=0
+transport: sql (transport: "sql)
+tp-sql-r2: RESULT steady_state_median_rps=14069.3 steady_state_mean_rps=12715.9 peak_rps=19386.5 total_done=200000 elapsed=18.1 submit_elapsed=0.2 drain_rps=11065.7 e2e_rps=10924.1 failed=0
+transport: redis (transport: "redis-sortedset)
+tp-redis-r2: RESULT steady_state_median_rps=2837.9 steady_state_mean_rps=2822.7 peak_rps=3421.7 total_done=200000 elapsed=72.5 submit_elapsed=0.3 drain_rps=2759.1 e2e_rps=2749.6 failed=0
+transport: sql (transport: "sql)
+tp-sql-r3: RESULT steady_state_median_rps=14310.4 steady_state_mean_rps=11939.6 peak_rps=19446.8 total_done=200000 elapsed=16.1 submit_elapsed=0.2 drain_rps=12442.8 e2e_rps=12264.7 failed=0
+transport: redis (transport: "redis-sortedset)
+tp-redis-r3: RESULT steady_state_median_rps=2997.2 steady_state_mean_rps=2867.9 peak_rps=3622.0 total_done=200000 elapsed=72.3 submit_elapsed=0.2 drain_rps=2768.0 e2e_rps=2758.8 failed=0
+tput exit 0

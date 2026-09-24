@@ -268,8 +268,53 @@ def fig_fixes():
     save(fig, "08-fixes")
 
 
+def fig_transport():
+    reps = [1, 2, 3]
+    data = {}
+    for t in ("sql", "redis"):
+        for r in reps:
+            text = (BENCH_RUNS / f"tp-{t}-r{r}" / "driver.log").read_text()
+            e2e = float(re.search(r"e2e_rps=([0-9.]+)", text).group(1))
+            steady = float(re.search(r"steady_state_median_rps=([0-9.]+)", text).group(1))
+            data[(t, r)] = (e2e, steady)
+    fig, ax = plt.subplots(figsize=(8, 3.0))
+    width = 0.38
+    for i, (t, color, label) in enumerate([("sql", LIVE, "sql transport"), ("redis", BATCH, "redis-sortedset transport")]):
+        xs = [r + (i - 0.5) * width for r in reps]
+        ax.bar(xs, [data[(t, r)][0] / 1000 for r in reps], width, color=color, label=label)
+        for x, r in zip(xs, reps):
+            ax.annotate(f"{data[(t, r)][0] / 1000:.1f}k", (x, data[(t, r)][0] / 1000), ha="center", va="bottom", fontsize=7)
+            ax.plot([x - width / 2, x + width / 2], [data[(t, r)][1] / 1000] * 2, color="black", lw=1)
+    ax.set_xticks(reps, [f"rep {r}" for r in reps])
+    ax.set_ylabel("k req/s")
+    ax.set_title("Batch throughput by llm-d-async transport (bars: end to end; ticks: steady-state median)")
+    ax.legend(frameon=False, loc="upper center", bbox_to_anchor=(0.5, -0.1), ncol=2)
+    ax.set_ylim(0, 18)
+    save(fig, "10-transport")
+
+
+def fig_vllm_calibration():
+    rates = [30, 40, 50, 60, 70]
+    rows = [summary(f"vl-cal-{r}") for r in rates]
+    fig, ax = plt.subplots(figsize=(8, 3.2))
+    ax.plot(rates, [d["ttft_p99_ms"] for d in rows], marker="o", color=LIVE, label="TTFT p99")
+    ax.plot(rates, [d["ttft_p50_ms"] for d in rows], marker="o", color=NEUTRAL, label="TTFT p50")
+    ax.axhline(SLO_MS, color=BAD, ls="--", lw=1)
+    ax.annotate("500 ms SLO", (30, SLO_MS + 15), fontsize=7, color=BAD)
+    ax.set_xlabel("offered live rate (req/s), live only, 8 x H200 Qwen3-32B")
+    ax.set_ylabel("ms")
+    ax2 = ax.twinx()
+    ax2.plot(rates, [d["samples"]["engine_running"]["mean"] / 8 for d in rows], marker="s", color=BATCH, label="running per engine")
+    ax2.set_ylabel("running requests per engine")
+    ax2.spines["right"].set_visible(True)
+    lines = ax.get_legend_handles_labels()[0] + ax2.get_legend_handles_labels()[0]
+    ax.legend(lines, [l.get_label() for l in lines], frameon=False, loc="upper left")
+    ax.set_title("Real vLLM calibration: the SLO knee is ~55 req/s at ~18 running per engine")
+    save(fig, "11-vllm-calibration")
+
+
 if __name__ == "__main__":
-    for f in [fig_throughput, fig_capacity, fig_scenarios, fig_holdback, fig_timeline, fig_queue, fig_chaos, fig_fixes]:
+    for f in [fig_throughput, fig_capacity, fig_scenarios, fig_holdback, fig_timeline, fig_queue, fig_chaos, fig_fixes, fig_transport, fig_vllm_calibration]:
         try:
             f()
             print("wrote", f.__name__)

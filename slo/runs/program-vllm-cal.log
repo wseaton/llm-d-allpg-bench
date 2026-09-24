@@ -1,0 +1,6 @@
+rate 30: delivered 29.6 req/s, ttft p50/p99 92/218 ms, slo 1.0, errors 0, engine running {'mean': 74.17, 'max': 93.0}, waiting {'mean': 0.0, 'max': 0.0}
+rate 40: delivered 37.9 req/s, ttft p50/p99 108/292 ms, slo 1.0, errors 0, engine running {'mean': 95.7, 'max': 134.0}, waiting {'mean': 0.0, 'max': 0.0}
+rate 50: delivered 48.4 req/s, ttft p50/p99 138/423 ms, slo 0.9953, errors 0, engine running {'mean': 128.45, 'max': 168.0}, waiting {'mean': 0.0, 'max': 0.0}
+rate 60: delivered 58.1 req/s, ttft p50/p99 185/545 ms, slo 0.9807, errors 0, engine running {'mean': 159.79, 'max': 213.0}, waiting {'mean': 0.0, 'max': 0.0}
+rate 70: delivered 67.3 req/s, ttft p50/p99 206/788 ms, slo 0.9212, errors 0, engine running {'mean': 192.68, 'max': 279.0}, waiting {'mean': 0.0, 'max': 0.0}
+done

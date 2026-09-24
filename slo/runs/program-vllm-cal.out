@@ -1,0 +1,240 @@
+{
+  "live_requests": 5410,
+  "live_errors": 0,
+  "live_rps": 29.6,
+  "ttft_p50_ms": 92,
+  "ttft_p90_ms": 151,
+  "ttft_p99_ms": 218,
+  "itl_p50_ms": 18.8,
+  "itl_p99_ms": 49.4,
+  "e2e_p50_ms": 2570,
+  "e2e_p99_ms": 2711,
+  "slo_attainment": 1.0,
+  "window_s": 183,
+  "ttft_p99_by_20s": {
+    "0s": 218,
+    "20s": 195,
+    "40s": 224,
+    "60s": 226,
+    "80s": 217,
+    "100s": 205,
+    "120s": 222,
+    "140s": 214,
+    "160s": 239
+  },
+  "epp_requests": {
+    "p100/Dispatched": 5410
+  },
+  "epp_queue_after": {},
+  "dispatcher_deltas": {},
+  "samples": {
+    "engine_running": {
+      "mean": 74.17,
+      "max": 93.0
+    },
+    "engine_waiting": {
+      "mean": 0.0,
+      "max": 0.0
+    },
+    "epp_queue_p100": {
+      "mean": 0.01,
+      "max": 1.0
+    },
+    "saturation": {
+      "mean": 0.04,
+      "max": 0.04541015625
+    }
+  }
+}
+{
+  "live_requests": 6940,
+  "live_errors": 0,
+  "live_rps": 37.9,
+  "ttft_p50_ms": 108,
+  "ttft_p90_ms": 195,
+  "ttft_p99_ms": 292,
+  "itl_p50_ms": 18.8,
+  "itl_p99_ms": 55.1,
+  "e2e_p50_ms": 2623,
+  "e2e_p99_ms": 2914,
+  "slo_attainment": 1.0,
+  "window_s": 183,
+  "ttft_p99_by_20s": {
+    "0s": 308,
+    "20s": 306,
+    "40s": 284,
+    "60s": 286,
+    "80s": 270,
+    "100s": 297,
+    "120s": 320,
+    "140s": 261,
+    "160s": 303
+  },
+  "epp_requests": {
+    "p100/Dispatched": 6940
+  },
+  "epp_queue_after": {},
+  "dispatcher_deltas": {},
+  "samples": {
+    "engine_running": {
+      "mean": 95.7,
+      "max": 134.0
+    },
+    "engine_waiting": {
+      "mean": 0.0,
+      "max": 0.0
+    },
+    "epp_queue_p100": {
+      "mean": 0.0,
+      "max": 0.0
+    },
+    "saturation": {
+      "mean": 0.05,
+      "max": 0.0693359375
+    }
+  }
+}
+{
+  "live_requests": 8858,
+  "live_errors": 0,
+  "live_rps": 48.4,
+  "ttft_p50_ms": 138,
+  "ttft_p90_ms": 270,
+  "ttft_p99_ms": 423,
+  "itl_p50_ms": 19.2,
+  "itl_p99_ms": 74.6,
+  "e2e_p50_ms": 2767,
+  "e2e_p99_ms": 3150,
+  "slo_attainment": 0.9953,
+  "window_s": 183,
+  "ttft_p99_by_20s": {
+    "0s": 299,
+    "20s": 528,
+    "40s": 375,
+    "60s": 385,
+    "80s": 487,
+    "100s": 572,
+    "120s": 446,
+    "140s": 372,
+    "160s": 365
+  },
+  "epp_requests": {
+    "p100/Dispatched": 8858
+  },
+  "epp_queue_after": {},
+  "dispatcher_deltas": {},
+  "samples": {
+    "engine_running": {
+      "mean": 128.45,
+      "max": 168.0
+    },
+    "engine_waiting": {
+      "mean": 0.0,
+      "max": 0.0
+    },
+    "epp_queue_p100": {
+      "mean": 0.0,
+      "max": 0.0
+    },
+    "saturation": {
+      "mean": 0.06,
+      "max": 0.0830078125
+    }
+  }
+}
+{
+  "live_requests": 10629,
+  "live_errors": 0,
+  "live_rps": 58.1,
+  "ttft_p50_ms": 185,
+  "ttft_p90_ms": 370,
+  "ttft_p99_ms": 545,
+  "itl_p50_ms": 19.5,
+  "itl_p99_ms": 81.4,
+  "e2e_p50_ms": 2897,
+  "e2e_p99_ms": 3361,
+  "slo_attainment": 0.9807,
+  "window_s": 183,
+  "ttft_p99_by_20s": {
+    "0s": 506,
+    "20s": 502,
+    "40s": 432,
+    "60s": 585,
+    "80s": 520,
+    "100s": 494,
+    "120s": 561,
+    "140s": 618,
+    "160s": 499
+  },
+  "epp_requests": {
+    "p100/Dispatched": 10629
+  },
+  "epp_queue_after": {},
+  "dispatcher_deltas": {},
+  "samples": {
+    "engine_running": {
+      "mean": 159.79,
+      "max": 213.0
+    },
+    "engine_waiting": {
+      "mean": 0.0,
+      "max": 0.0
+    },
+    "epp_queue_p100": {
+      "mean": 0.0,
+      "max": 0.0
+    },
+    "saturation": {
+      "mean": 0.08,
+      "max": 0.10498046875
+    }
+  }
+}
+{
+  "live_requests": 12314,
+  "live_errors": 0,
+  "live_rps": 67.3,
+  "ttft_p50_ms": 206,
+  "ttft_p90_ms": 468,
+  "ttft_p99_ms": 788,
+  "itl_p50_ms": 19.7,
+  "itl_p99_ms": 101.2,
+  "e2e_p50_ms": 3024,
+  "e2e_p99_ms": 3915,
+  "slo_attainment": 0.9212,
+  "window_s": 183,
+  "ttft_p99_by_20s": {
+    "0s": 955,
+    "20s": 836,
+    "40s": 740,
+    "60s": 706,
+    "80s": 953,
+    "100s": 741,
+    "120s": 672,
+    "140s": 633,
+    "160s": 670
+  },
+  "epp_requests": {
+    "p100/Dispatched": 12314
+  },
+  "epp_queue_after": {},
+  "dispatcher_deltas": {},
+  "samples": {
+    "engine_running": {
+      "mean": 192.68,
+      "max": 279.0
+    },
+    "engine_waiting": {
+      "mean": 0.0,
+      "max": 0.0
+    },
+    "epp_queue_p100": {
+      "mean": 0.0,
+      "max": 0.0
+    },
+    "saturation": {
+      "mean": 0.1,
+      "max": 0.1376953125
+    }
+  }
+}
