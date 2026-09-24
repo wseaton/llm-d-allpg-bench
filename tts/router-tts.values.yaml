@@ -1,0 +1,21 @@
+## Layer on guides/recipes/router/base.values.yaml. Release name "tts" names the pool: the
+## Qwen3-TTS engine (tts.yaml) behind the recipe's default plugins, no flow control.
+router:
+  extraServicePorts:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 8081
+  proxy:
+    presets:
+      envoy:
+        configMap:
+          name: tts-envoy
+  modelServers:
+    matchLabels:
+      app: tts-omni
+  monitoring:
+    prometheus:
+      enabled: false
+      auth:
+        enabled: false

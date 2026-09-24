@@ -1,0 +1,69 @@
+# Qwen3-TTS (CustomVoice, 1.7B) on vLLM-Omni v0.28.0, one H200: the TTS engine for the batch TTS
+# smoke (RHAISTRAT-2740). Serves POST /v1/audio/speech (binary audio) and /v1/audio/speech/batch
+# (base64 JSON). The deploy config ships in the vllm_omni package of the image.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tts-omni
+  labels: {app: tts-omni}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {app: tts-omni}
+  template:
+    metadata:
+      labels:
+        app: tts-omni
+        llm-d.ai/role: decode
+    spec:
+      terminationGracePeriodSeconds: 60
+      containers:
+        - name: modelserver
+          image: vllm/vllm-omni:v0.28.0
+          imagePullPolicy: IfNotPresent
+          command: ["vllm", "serve"]
+          args:
+            - "Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice"
+            - "--served-model-name=Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice"
+            - "--deploy-config=/usr/local/lib/python3.12/dist-packages/vllm_omni/deploy/qwen3_tts.yaml"
+            - "--omni"
+            - "--port=8000"
+            - "--trust-remote-code"
+            - "--enforce-eager"
+          env:
+            - name: HF_TOKEN
+              valueFrom:
+                secretKeyRef: {name: llm-d-hf-token, key: HF_TOKEN}
+            - {name: HF_HOME, value: /hf-cache}
+          ports:
+            - {name: modelserver, containerPort: 8000, protocol: TCP}
+          resources:
+            limits: {cpu: "16", memory: 64Gi, nvidia.com/gpu: 1}
+            requests: {cpu: "8", memory: 32Gi, nvidia.com/gpu: 1}
+          startupProbe:
+            httpGet: {path: /v1/models, port: modelserver}
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 120
+          readinessProbe:
+            httpGet: {path: /v1/models, port: modelserver}
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 3
+          volumeMounts:
+            - {mountPath: /dev/shm, name: shm}
+            - {mountPath: /hf-cache, name: hf-cache}
+      volumes:
+        - name: shm
+          emptyDir: {medium: Memory, sizeLimit: 16Gi}
+        - {name: hf-cache, emptyDir: {}}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tts-omni
+spec:
+  selector: {app: tts-omni}
+  ports:
+    - {name: http, port: 8000, targetPort: modelserver}

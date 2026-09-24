@@ -1,0 +1,29 @@
+# Layer on ../dispatcher-values.yaml: a TTS queue into the tts router, and the S3 result store
+# (the gateway's files bucket on SeaweedFS) for bodies returned by reference.
+ap:
+  image:
+    tag: allpg-10-blobref
+  resultStore:
+    s3:
+      bucket: batch-files
+      endpoint: http://seaweedfs-s3.allpg-bench.svc.cluster.local:8333
+      region: us-east-1
+      prefix: llm-d-async/results
+      pathStyle: true
+  env:
+    - {name: AWS_ACCESS_KEY_ID, value: bench}
+    - name: AWS_SECRET_ACCESS_KEY
+      valueFrom:
+        secretKeyRef: {name: batch-gateway-secrets, key: s3-secret-access-key}
+  transportConfig:
+    queues:
+      - queue_name: "llm-d-async:requests:sim-pool"
+        request_path_url: "/v1/chat/completions"
+        igw_base_url: "http://10.16.1.241:8000"
+        gate_type: "constant"
+        gate_params: {}
+      - queue_name: "llm-d-async:requests:tts-pool"
+        request_path_url: "/v1/audio/speech"
+        igw_base_url: "http://tts-epp.allpg-bench.svc.cluster.local:80"
+        gate_type: "constant"
+        gate_params: {}

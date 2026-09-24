@@ -1,0 +1,53 @@
+# SeaweedFS 4.47 as the S3 store for the batch TTS path: the gateway's files bucket, into
+# which the async dispatcher also writes response bodies stored by reference. Single node,
+# S3 API on :8333 with no identities configured (any key pair signs), for the bench only.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: seaweedfs-data
+spec:
+  accessModes: [ReadWriteOnce]
+  storageClassName: shared-vast
+  resources:
+    requests: {storage: 100Gi}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: seaweedfs
+  labels: {app: seaweedfs}
+spec:
+  replicas: 1
+  strategy: {type: Recreate}
+  selector:
+    matchLabels: {app: seaweedfs}
+  template:
+    metadata:
+      labels: {app: seaweedfs}
+    spec:
+      containers:
+        - name: seaweedfs
+          image: chrislusf/seaweedfs:4.47
+          args: ["server", "-s3", "-s3.port=8333", "-dir=/data", "-master.volumeSizeLimitMB=1024", "-volume.max=0"]
+          ports:
+            - {name: s3, containerPort: 8333}
+          readinessProbe:
+            tcpSocket: {port: s3}
+            periodSeconds: 5
+          resources:
+            requests: {cpu: "2", memory: 4Gi}
+            limits: {cpu: "8", memory: 16Gi}
+          volumeMounts:
+            - {name: data, mountPath: /data}
+      volumes:
+        - name: data
+          persistentVolumeClaim: {claimName: seaweedfs-data}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: seaweedfs-s3
+spec:
+  selector: {app: seaweedfs}
+  ports:
+    - {name: s3, port: 8333, targetPort: s3}

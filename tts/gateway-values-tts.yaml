@@ -1,0 +1,26 @@
+# Layer on ../gateway-values.yaml: the S3 files store on SeaweedFS (required to adopt audio
+# the dispatcher stores by reference) and the Qwen3-TTS model on its own async queue.
+global:
+  fileClient:
+    type: s3
+    s3:
+      region: us-east-1
+      bucket: batch-files
+      endpoint: http://seaweedfs-s3.allpg-bench.svc.cluster.local:8333
+      accessKeyId: bench
+      usePathStyle: true
+      autoCreateBucket: true
+apiserver:
+  image:
+    tag: allpg-10-blobref
+processor:
+  image:
+    tag: allpg-10-blobref
+  config:
+    asyncDispatch:
+      resultStorePrefix: llm-d-async/results
+      models:
+        Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice:
+          inferencePoolName: tts
+          requestQueueName: llm-d-async:requests:tts-pool
+          resultQueueName: llm-d-async:results:tts-pool
