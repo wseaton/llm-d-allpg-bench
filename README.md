@@ -88,6 +88,5 @@ ASYNC_CHART=... ./slo/run.sh counted router-counted 80 600 6000
 ## Data
 
 Summaries only. The per-request JSONL from nyann-bench (about 2 GB) and the metric sampler
-logs are not in git. So `make_figures.py` redraws the figures whose inputs are here (the
-throughput, scenario, holdback and fixes charts, among others) and skips the ones that need
-raw data.
+logs are not in git. So `make_figures.py` redraws the four figures whose inputs are here (throughput, scenarios,
+holdback, fixes) and skips the four that need raw data.
