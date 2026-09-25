@@ -1,0 +1,17 @@
+apiVersion: llm-d.ai/v1alpha2
+kind: InferenceObjective
+metadata:
+  name: tts-live
+spec:
+  priority: 100
+  poolRef:
+    name: tts
+---
+apiVersion: llm-d.ai/v1alpha2
+kind: InferenceObjective
+metadata:
+  name: tts-batch
+spec:
+  priority: -10
+  poolRef:
+    name: tts

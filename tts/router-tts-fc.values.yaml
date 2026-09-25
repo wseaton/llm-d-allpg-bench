@@ -1,0 +1,76 @@
+## router-tts.values.yaml plus flow control: InferenceObjective priority bands (tts-live 100,
+## tts-batch -10) and the priority-holdback usage limit, with the concurrency detector counting the
+## EPP's own in-flight requests (no engine metrics needed). maxConcurrency 50: live streaming TTS
+## on one H200 holds a 500 ms time-to-first-audio p99 up to ~45 in flight, and 0.8 x 50 = 40.
+router:
+  extraServicePorts:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 8081
+  inferencePool:
+    failureMode: FailOpen
+  epp:
+    flags:
+      allow-experimental-plugins: true
+    pluginsConfigFile: "tts.yaml"
+    pluginsCustomConfig:
+      tts.yaml: |
+        apiVersion: llm-d.ai/v1alpha1
+        kind: EndpointPickerConfig
+        featureGates:
+        - flowControl
+        plugins:
+        - name: activeRequest
+          type: active-request-scorer
+        - name: maxScore
+          type: max-score-picker
+        - type: global-strict-fairness-policy
+        - type: fcfs-ordering-policy
+        - type: priority-holdback-policy
+          name: holdback
+          parameters:
+            domain: rank
+            minCeiling: 0.8
+            maxCeiling: 1.0
+        - type: concurrency-detector
+          parameters:
+            maxConcurrency: 50
+            concurrencyMode: requests
+            headroom: 0.0
+        schedulingProfiles:
+        - name: default
+          plugins:
+          - pluginRef: activeRequest
+          - pluginRef: maxScore
+        dataLayer:
+          injectDefaults: false
+        flowControl:
+          maxBytes: "10Gi"
+          maxRequests: "20k"
+          defaultRequestTTL: "300s"
+          saturationDetector:
+            pluginRef: concurrency-detector
+          usageLimitPolicyPluginRef: holdback
+          priorityBands:
+          - priority: 100
+            maxRequests: "2k"
+            fairnessPolicyRef: global-strict-fairness-policy
+            orderingPolicyRef: fcfs-ordering-policy
+          - priority: -10
+            maxRequests: "10k"
+            fairnessPolicyRef: global-strict-fairness-policy
+            orderingPolicyRef: fcfs-ordering-policy
+  proxy:
+    presets:
+      envoy:
+        configMap:
+          name: tts-envoy
+  modelServers:
+    matchLabels:
+      app: tts-omni
+  monitoring:
+    prometheus:
+      enabled: false
+      auth:
+        enabled: false

@@ -1,0 +1,26 @@
+# Layer on ../dispatcher-values.yaml and dispatcher-values-tts.yaml: TTS batch goes through the
+# tts router under the tts-batch objective, gated by counted admission on the TTS EPP's batch
+# queue. The pool capacity is fixed (8 slots for the one engine): with the TTS guide's data layer
+# off, llm_d_epp_ready_endpoints reads 0.
+ap:
+  prometheusCacheTTL: "250ms"
+  transportConfig:
+    queues:
+      - queue_name: "llm-d-async:requests:sim-pool"
+        request_path_url: "/v1/chat/completions"
+        igw_base_url: "http://10.16.1.241:8000"
+        gate_type: "constant"
+        gate_params: {}
+      - queue_name: "llm-d-async:requests:tts-pool"
+        request_path_url: "/v1/audio/speech"
+        igw_base_url: "http://tts-epp.allpg-bench.svc.cluster.local:80"
+        inference_objective: "tts-batch"
+        gate_type: "endpoint-scrape"
+        gate_params:
+          url: "http://tts-epp.allpg-bench.svc.cluster.local:9090/metrics"
+          metric: "llm_d_epp_flow_control_queue_size"
+          labels: {inference_pool: "tts", priority: "-10"}
+          max_count_per_pod: 8
+          value_type: "saturation"
+          admission: "counted"
+          absent_value: 0

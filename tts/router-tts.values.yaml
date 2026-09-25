@@ -1,11 +1,33 @@
-## Layer on guides/recipes/router/base.values.yaml. Release name "tts" names the pool: the
-## Qwen3-TTS engine (tts.yaml) behind the recipe's default plugins, no flow control.
+## Layer on guides/recipes/router/base.values.yaml. Release name "tts" names the pool. The EPP
+## config follows llm-d's text-to-speech guide (guides/diffusion-serving/text-to-speech): route on
+## the EPP's own active-request count and skip the default data layer, whose metric scrapers and
+## token producer do not apply to vllm-omni's audio endpoint.
 router:
   extraServicePorts:
     - name: http
       port: 80
       protocol: TCP
       targetPort: 8081
+  inferencePool:
+    failureMode: FailOpen
+  epp:
+    pluginsConfigFile: "tts.yaml"
+    pluginsCustomConfig:
+      tts.yaml: |
+        apiVersion: llm-d.ai/v1alpha1
+        kind: EndpointPickerConfig
+        plugins:
+        - name: activeRequest
+          type: active-request-scorer
+        - name: maxScore
+          type: max-score-picker
+        schedulingProfiles:
+        - name: default
+          plugins:
+          - pluginRef: activeRequest
+          - pluginRef: maxScore
+        dataLayer:
+          injectDefaults: false
   proxy:
     presets:
       envoy:
